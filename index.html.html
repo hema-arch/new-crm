@@ -1,0 +1,2170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dhanam CRM — Dhanam Investment & Finance Pvt. Ltd.</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#C8992A;--gold-light:#F5E6BB;--gold-dark:#8B6A1A;
+  --navy:#0D1B3E;--navy-mid:#1A2F5E;--navy-light:#2B4A8A;
+  --teal:#1D7A6E;--teal-light:#E3F4F2;
+  --red:#C0392B;--red-light:#FDECEA;
+  --green:#1A7A4A;--green-light:#E3F5EC;
+  --amber:#C87A1A;--amber-light:#FEF3E2;
+  --bg:#F4F2EE;--surface:#FFFFFF;--surface2:#F9F8F6;
+  --border:#E2DDD5;--border2:#C8C0B0;
+  --text:#1A1612;--text2:#5C5448;--text3:#9C9288;
+  --sidebar-w:240px;--header-h:58px;
+  --radius:8px;--radius-lg:12px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14px}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);height:100vh;display:flex;flex-direction:column;overflow:hidden}
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:10px}
+
+/* TOPBAR */
+#topbar{height:var(--header-h);background:var(--navy);display:flex;align-items:center;padding:0 20px;gap:16px;flex-shrink:0;border-bottom:2px solid var(--gold);z-index:100}
+.logo-area{display:flex;align-items:center;gap:10px;width:var(--sidebar-w)}
+.logo-icon{width:34px;height:34px;background:var(--gold);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:18px;color:var(--navy)}
+.logo-text{font-family:'DM Serif Display',serif;font-size:16px;color:#fff;line-height:1.15}
+.logo-sub{font-size:9.5px;color:var(--gold);letter-spacing:1.2px;text-transform:uppercase}
+#topbar-search{flex:1;max-width:380px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:7px 14px;color:#fff;font-size:13px;font-family:inherit;outline:none}
+#topbar-search::placeholder{color:rgba(255,255,255,0.35)}
+#topbar-search:focus{border-color:var(--gold)}
+.topbar-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.tb-badge{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:5px 12px;color:rgba(255,255,255,0.7);font-size:12px;cursor:pointer;display:flex;align-items:center;gap:6px}
+.dot{width:8px;height:8px;border-radius:50%}
+.notif-btn{width:32px;height:32px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;font-size:15px}
+.notif-dot{position:absolute;top:5px;right:5px;width:7px;height:7px;background:var(--gold);border-radius:50%}
+.avatar{width:32px;height:32px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--navy);cursor:pointer}
+
+/* BRANCH SWITCHER */
+#branch-bar{background:var(--navy-mid);border-bottom:1px solid rgba(255,255,255,0.08);padding:0 20px;display:flex;align-items:center;gap:10px;height:36px;flex-shrink:0}
+.branch-label{font-size:11px;color:rgba(255,255,255,0.45);letter-spacing:0.8px;text-transform:uppercase}
+#branch-select{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:#fff;border-radius:5px;padding:3px 10px;font-size:12px;font-family:inherit;outline:none;cursor:pointer;max-width:280px}
+#branch-select option{background:var(--navy-mid);color:#fff}
+.branch-badge{font-size:10px;padding:2px 8px;border-radius:10px;background:rgba(200,153,42,0.2);color:var(--gold);letter-spacing:0.5px}
+
+/* LAYOUT */
+#layout{display:flex;flex:1;overflow:hidden}
+
+/* SIDEBAR */
+#sidebar{width:var(--sidebar-w);background:var(--navy-mid);display:flex;flex-direction:column;overflow-y:auto;flex-shrink:0;border-right:1px solid rgba(255,255,255,0.06)}
+.sidebar-section{padding:16px 12px 6px}
+.sidebar-section-label{font-size:9.5px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.3);padding:0 8px;margin-bottom:4px}
+.nav-item{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:6px;cursor:pointer;transition:all .15s;color:rgba(255,255,255,0.55);font-size:13px;margin-bottom:1px}
+.nav-item:hover{background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.85)}
+.nav-item.active{background:rgba(200,153,42,0.18);color:var(--gold)}
+.nav-icon{font-size:14px;width:18px;text-align:center;flex-shrink:0}
+.nav-badge{margin-left:auto;background:var(--gold);color:var(--navy);border-radius:10px;font-size:10px;font-weight:600;padding:1px 6px;min-width:18px;text-align:center}
+
+/* MAIN */
+#main{flex:1;overflow:hidden;display:flex;flex-direction:column}
+#page-header{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:center;gap:12px;flex-shrink:0}
+#page-title{font-size:18px;font-weight:500}
+#page-subtitle{font-size:12px;color:var(--text3);margin-top:1px}
+.page-actions{margin-left:auto;display:flex;gap:8px}
+.btn{padding:7px 14px;border-radius:6px;font-size:13px;font-weight:500;cursor:pointer;border:none;outline:none;transition:all .15s;font-family:inherit;display:flex;align-items:center;gap:6px}
+.btn-primary{background:var(--gold);color:var(--navy)}.btn-primary:hover{background:#d4a630}
+.btn-secondary{background:var(--surface2);color:var(--text);border:1px solid var(--border)}.btn-secondary:hover{background:var(--border)}
+.btn-outline{background:transparent;color:var(--text2);border:1px solid var(--border)}.btn-outline:hover{background:var(--surface2)}
+.btn-success{background:var(--green);color:#fff}
+.btn-sm{padding:4px 10px;font-size:12px}
+#content{flex:1;overflow-y:auto;padding:20px 24px}
+
+/* CARDS */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px 20px}
+.card-title{font-size:14px;font-weight:500;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:20px}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px 16px}
+.stat-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:5px}
+.stat-value{font-size:22px;font-weight:500;font-family:'DM Serif Display',serif}
+.stat-meta{font-size:11px;color:var(--text3);margin-top:4px}
+.up{color:var(--green)}.down{color:var(--red)}
+
+/* TABS */
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--border);margin-bottom:16px}
+.tab{padding:8px 14px;font-size:13px;color:var(--text3);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s}
+.tab:hover{color:var(--text2)}
+.tab.active{color:var(--gold);border-bottom-color:var(--gold);font-weight:500}
+
+/* TABLE */
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;padding:8px 12px;color:var(--text3);font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:0.8px;border-bottom:1px solid var(--border);background:var(--surface2)}
+td{padding:10px 12px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:middle}
+tr:hover td{background:var(--surface2)}
+tr:last-child td{border-bottom:none}
+
+/* BADGES */
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:20px;font-size:11px;font-weight:500}
+.bg{background:var(--gold-light);color:var(--gold-dark)}
+.bn{background:rgba(13,27,62,0.1);color:var(--navy-mid)}
+.bgreen{background:var(--green-light);color:var(--green)}
+.bred{background:var(--red-light);color:var(--red)}
+.bamber{background:var(--amber-light);color:var(--amber)}
+.bteal{background:var(--teal-light);color:var(--teal)}
+.bgray{background:#F0EEE9;color:var(--text3)}
+
+/* FORM */
+.fg{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
+.fg label{font-size:12px;color:var(--text2);font-weight:500}
+.fg.full{grid-column:1/-1}
+.form-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+input,select,textarea{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:8px 10px;font-size:13px;color:var(--text);font-family:inherit;outline:none;transition:border-color .15s;width:100%}
+input:focus,select:focus,textarea:focus{border-color:var(--gold);background:var(--surface)}
+textarea{resize:vertical;min-height:70px}
+
+/* PIPELINE */
+.pipeline-wrap{display:flex;gap:14px;overflow-x:auto;padding-bottom:8px}
+.pipeline-col{min-width:200px;width:200px;flex-shrink:0}
+.pipeline-header{padding:10px 12px;border-radius:8px 8px 0 0;font-size:12px;font-weight:500;display:flex;justify-content:space-between;align-items:center}
+.pipeline-cards{display:flex;flex-direction:column;gap:8px;padding:10px;background:var(--surface2);border:1px solid var(--border);border-top:none;border-radius:0 0 8px 8px;min-height:100px}
+.pipeline-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 12px;cursor:pointer;transition:all .15s}
+.pipeline-card:hover{border-color:var(--gold);box-shadow:0 2px 8px rgba(200,153,42,.12)}
+.pc-name{font-size:13px;font-weight:500;color:var(--text);margin-bottom:4px}
+.pc-meta{font-size:11px;color:var(--text3);display:flex;justify-content:space-between}
+.pc-amount{font-size:13px;font-weight:600;color:var(--gold-dark);margin-top:4px}
+
+/* MODAL */
+#modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;display:none;align-items:center;justify-content:center}
+#modal-overlay.open{display:flex}
+.modal{background:var(--surface);border-radius:var(--radius-lg);width:680px;max-width:96vw;max-height:90vh;overflow-y:auto;border:1px solid var(--border)}
+.modal-header{padding:18px 20px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.modal-title{font-size:16px;font-weight:500}
+.modal-body{padding:20px}
+.modal-footer{padding:14px 20px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:8px}
+.close-btn{background:none;border:none;font-size:18px;cursor:pointer;color:var(--text3);padding:2px 6px;border-radius:4px}
+.close-btn:hover{background:var(--surface2)}
+
+/* NOTES SECTION */
+.notes-panel{display:flex;flex-direction:column;gap:10px}
+.note-item{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;position:relative}
+.note-item-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.note-author{display:flex;align-items:center;gap:7px}
+.note-avatar{width:24px;height:24px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--gold);font-weight:600}
+.note-name{font-size:12px;font-weight:500;color:var(--text)}
+.note-time{font-size:11px;color:var(--text3)}
+.note-text{font-size:13px;color:var(--text2);line-height:1.55}
+.note-type-tag{font-size:10px;padding:2px 7px;border-radius:10px;font-weight:500}
+.note-add-box{border:1.5px dashed var(--border2);border-radius:8px;padding:12px}
+.note-add-row{display:flex;gap:8px;margin-top:8px}
+
+/* DETAIL PANEL */
+#detail-panel{width:380px;flex-shrink:0;background:var(--surface);border-left:1px solid var(--border);overflow-y:auto;display:none}
+#detail-panel.open{display:block}
+.dp-header{padding:16px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
+.dp-avatar{width:44px;height:44px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--gold);font-weight:600}
+.dp-name{font-size:15px;font-weight:500}
+.dp-sub{font-size:12px;color:var(--text3);margin-top:2px}
+.dp-section{padding:14px 18px;border-bottom:1px solid var(--border)}
+.dp-section-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--text3);margin-bottom:10px}
+.dp-row{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:7px;font-size:13px;gap:8px}
+.dp-row-label{color:var(--text3);flex-shrink:0}
+.dp-row-val{color:var(--text);font-weight:500;text-align:right}
+
+/* TOAST */
+#toast{position:fixed;bottom:24px;right:24px;background:var(--navy);color:#fff;padding:12px 18px;border-radius:8px;font-size:13px;display:none;align-items:center;gap:10px;z-index:9999;border-left:3px solid var(--gold);box-shadow:0 4px 20px rgba(0,0,0,.25)}
+#toast.show{display:flex}
+
+/* CHARTS */
+.bar-chart{display:flex;align-items:flex-end;gap:6px;height:100px}
+.bar-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px}
+.bar{width:100%;border-radius:4px 4px 0 0;background:var(--gold);transition:height .4s}
+.bar-label{font-size:9.5px;color:var(--text3)}
+.bar-val{font-size:9.5px;color:var(--text2);font-weight:500}
+
+/* PROGRESS */
+.pb{height:6px;background:var(--surface2);border-radius:3px;overflow:hidden}
+.pf{height:100%;background:var(--gold);border-radius:3px}
+.pf.green{background:var(--green)}
+.pf.red{background:var(--red)}
+
+/* NCD CARDS */
+.ncd-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-bottom:20px}
+.ncd-card{border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.ncd-card-header{padding:16px 18px 12px;background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%)}
+.ncd-card-header.featured{background:linear-gradient(135deg,#7a5210 0%,var(--gold-dark) 100%)}
+.ncd-name{font-size:15px;font-weight:500;color:#fff;font-family:'DM Serif Display',serif}
+.ncd-sub{font-size:11px;color:rgba(255,255,255,0.55);margin-top:2px}
+.ncd-body{padding:14px 18px;background:var(--surface)}
+.ncd-rate{font-size:28px;font-weight:500;color:var(--gold-dark);font-family:'DM Serif Display',serif}
+.ncd-rate-label{font-size:11px;color:var(--text3)}
+.ncd-table{width:100%;font-size:12px;border-collapse:collapse;margin-top:10px}
+.ncd-table th{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.6px;padding:4px 0;border-bottom:1px solid var(--border);font-weight:500}
+.ncd-table td{padding:5px 0;color:var(--text2);border-bottom:1px solid var(--border)}
+.ncd-table tr:last-child td{border-bottom:none}
+
+/* SECTION GRIDS */
+.sg2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.sg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px}
+
+/* BRANCH SUB-ACCOUNT */
+.branch-card{border:1px solid var(--border);border-radius:10px;padding:14px;background:var(--surface);cursor:pointer;transition:all .15s}
+.branch-card:hover{border-color:var(--gold);box-shadow:0 2px 10px rgba(200,153,42,.1)}
+.branch-card.hq{border-left:3px solid var(--gold)}
+.branch-card.upcoming{opacity:.65;border-style:dashed}
+.bc-name{font-size:14px;font-weight:500;color:var(--text)}
+.bc-dist{font-size:11px;color:var(--text3);margin-top:2px}
+.bc-stats{display:flex;gap:12px;margin-top:10px}
+.bc-stat{font-size:11px;color:var(--text3)}
+.bc-stat strong{display:block;font-size:13px;color:var(--text);font-weight:500}
+
+/* LOAN PRODUCT CARDS */
+.lp-card{border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.lp-header{padding:16px 18px;display:flex;align-items:flex-start;justify-content:space-between}
+.lp-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.lp-name{font-size:15px;font-weight:500;font-family:'DM Serif Display',serif}
+.lp-tag{font-size:11px;color:var(--text3);margin-top:2px}
+.lp-body{padding:0 18px 16px}
+.lp-specs{display:flex;flex-direction:column;gap:6px}
+.lp-row{display:flex;justify-content:space-between;font-size:12px;padding:5px 0;border-bottom:1px solid var(--border)}
+.lp-row:last-child{border-bottom:none}
+.lp-row span:first-child{color:var(--text3)}
+.lp-row span:last-child{font-weight:500;color:var(--text)}
+
+/* TIMELINE */
+.tl-item{display:flex;gap:10px;margin-bottom:12px}
+.tl-dot{width:26px;height:26px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px}
+.tl-gold{background:var(--gold-light);color:var(--gold-dark)}
+.tl-teal{background:var(--teal-light);color:var(--teal)}
+.tl-navy{background:rgba(13,27,62,.08);color:var(--navy)}
+.tl-text{font-size:13px;color:var(--text2);line-height:1.5}
+.tl-time{font-size:11px;color:var(--text3);margin-top:2px}
+
+/* PAGE SHOW/HIDE */
+.page{display:none}
+.page.active{display:block}
+
+/* WA */
+.wa-wrap{display:grid;grid-template-columns:270px 1fr;height:460px;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--surface)}
+.wa-list{border-right:1px solid var(--border);overflow-y:auto;background:var(--surface2)}
+.wa-header{padding:12px;border-bottom:1px solid var(--border);font-weight:500;font-size:13px;display:flex;align-items:center;justify-content:space-between}
+.wa-contact{padding:10px 12px;cursor:pointer;display:flex;gap:10px;align-items:center;border-bottom:1px solid var(--border)}
+.wa-contact:hover{background:rgba(200,153,42,.05)}
+.wa-contact.active{background:rgba(200,153,42,.08)}
+.wa-chat-area{display:flex;flex-direction:column}
+.wa-chat-header{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.wa-chat{background:#e5ddd5;flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:8px}
+.wm{max-width:78%;padding:7px 10px;border-radius:7px;font-size:13px;line-height:1.45}
+.wm-out{background:#dcf8c6;align-self:flex-end;border-radius:7px 0 7px 7px}
+.wm-in{background:#fff;align-self:flex-start;border-radius:0 7px 7px 7px}
+.wm-time{font-size:10px;color:#999;margin-top:3px;text-align:right}
+.wa-footer{padding:10px 12px;border-top:1px solid var(--border);display:flex;gap:8px}
+.wa-input{flex:1;border-radius:20px;padding:8px 14px;border:1px solid var(--border);font-size:13px;font-family:inherit;outline:none}
+.wa-send-btn{background:var(--teal);color:#fff;border:none;border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+/* CALENDAR */
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+.cal-hdr{text-align:center;font-size:11px;color:var(--text3);padding:4px;font-weight:500}
+.cal-day{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:6px;font-size:12px;cursor:pointer;transition:all .15s;position:relative}
+.cal-day:hover{background:var(--surface2)}
+.cal-day.today{background:var(--navy);color:#fff;font-weight:600}
+.cal-day.has-event::after{content:'';position:absolute;bottom:3px;left:50%;transform:translateX(-50%);width:4px;height:4px;background:var(--gold);border-radius:50%}
+.cal-day.other{color:var(--text3)}
+
+/* EMI CALC */
+.calc-result{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:14px;margin-top:14px}
+
+/* ACTIVITY */
+.act-item{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)}
+.act-item:last-child{border-bottom:none}
+.act-icon{width:30px;height:30px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+.act-text{font-size:13px;color:var(--text2);line-height:1.4}
+.act-time{font-size:11px;color:var(--text3);margin-top:2px}
+
+/* CALLING */
+.calling-layout{display:flex;gap:0;height:calc(100vh - var(--header-h) - 36px - 58px);overflow:hidden}
+.call-list-panel{width:300px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden}
+.call-list-header{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.call-list-scroll{overflow-y:auto;flex:1}
+.call-item{padding:12px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s;display:flex;align-items:center;gap:10px}
+.call-item:hover{background:var(--surface2)}
+.call-item.active{background:rgba(200,153,42,0.08);border-left:3px solid var(--gold)}
+.call-item.active{padding-left:13px}
+.call-av{width:36px;height:36px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--gold);font-weight:600;flex-shrink:0;position:relative}
+.call-av-status{position:absolute;bottom:0;right:0;width:10px;height:10px;border-radius:50%;border:2px solid var(--surface)}
+.call-info{flex:1;min-width:0}
+.call-name{font-size:13px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.call-meta{font-size:11px;color:var(--text3);margin-top:2px;display:flex;align-items:center;gap:5px}
+.call-type-icon{font-size:13px}
+.call-time{font-size:11px;color:var(--text3);flex-shrink:0}
+.call-detail-panel{flex:1;background:var(--surface2);display:flex;flex-direction:column;overflow:hidden}
+.dial-pad-area{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;gap:0}
+.active-call-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;gap:16px;background:linear-gradient(160deg,var(--navy) 0%,var(--navy-mid) 100%);position:relative;overflow:hidden}
+.active-call-screen::before{content:'';position:absolute;width:300px;height:300px;border-radius:50%;border:1px solid rgba(200,153,42,.1);top:50%;left:50%;transform:translate(-50%,-50%)}
+.active-call-screen::after{content:'';position:absolute;width:400px;height:400px;border-radius:50%;border:1px solid rgba(200,153,42,.06);top:50%;left:50%;transform:translate(-50%,-50%)}
+.call-contact-av{width:72px;height:72px;border-radius:50%;background:rgba(200,153,42,0.2);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:26px;color:var(--gold);font-weight:600;font-family:'DM Serif Display',serif;z-index:1}
+.call-contact-name{font-size:20px;font-weight:500;color:#fff;font-family:'DM Serif Display',serif;z-index:1}
+.call-contact-sub{font-size:12px;color:rgba(255,255,255,.5);z-index:1}
+.call-timer{font-size:28px;font-weight:300;color:var(--gold);font-variant-numeric:tabular-nums;z-index:1;font-family:'DM Serif Display',serif}
+.call-controls{display:flex;gap:16px;z-index:1}
+.call-btn{width:52px;height:52px;border-radius:50%;border:none;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.call-btn.mute{background:rgba(255,255,255,0.1);color:#fff}.call-btn.mute:hover{background:rgba(255,255,255,.2)}
+.call-btn.mute.on{background:var(--amber);color:#fff}
+.call-btn.hold{background:rgba(255,255,255,0.1);color:#fff}.call-btn.hold:hover{background:rgba(255,255,255,.2)}
+.call-btn.end{background:var(--red);color:#fff;width:60px;height:60px}.call-btn.end:hover{background:#a93226}
+.call-btn.keypad{background:rgba(255,255,255,0.1);color:#fff}.call-btn.keypad:hover{background:rgba(255,255,255,.2)}
+.call-btn.speaker{background:rgba(255,255,255,0.1);color:#fff}.call-btn.speaker:hover{background:rgba(255,255,255,.2)}
+.call-btn.speaker.on{background:var(--teal);color:#fff}
+.dialpad{background:var(--surface);border-radius:var(--radius-lg);padding:20px;width:280px}
+.dialpad-display{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px 16px;font-size:22px;font-family:'DM Serif Display',serif;color:var(--text);text-align:center;margin-bottom:14px;min-height:52px;letter-spacing:2px}
+.dialpad-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.dp-key{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px 8px;text-align:center;cursor:pointer;transition:all .15s;user-select:none}
+.dp-key:hover{background:var(--border);border-color:var(--border2)}
+.dp-key:active{background:var(--gold-light)}
+.dp-key-num{font-size:18px;font-weight:500;font-family:'DM Serif Display',serif;color:var(--text)}
+.dp-key-sub{font-size:8.5px;color:var(--text3);letter-spacing:1px;margin-top:1px}
+.call-log-section{flex:1;overflow-y:auto;background:var(--surface2)}
+.call-log-header{padding:14px 20px;background:var(--surface);border-bottom:1px solid var(--border);font-size:13px;font-weight:500;display:flex;align-items:center;gap:10px}
+.call-log-item{padding:12px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;cursor:pointer;transition:background .15s;background:var(--surface)}
+.call-log-item:hover{background:var(--surface2)}
+.cli-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.cli-name{font-size:13px;font-weight:500;color:var(--text)}
+.cli-meta{font-size:11px;color:var(--text3);margin-top:2px}
+.cli-duration{font-size:12px;color:var(--text3);margin-left:auto}
+.call-note-form{background:var(--surface);border-top:1px solid var(--border);padding:14px 20px;display:flex;flex-direction:column;gap:8px;flex-shrink:0}
+
+/* CONVERSATIONS */
+.conv-layout{display:flex;height:calc(100vh - var(--header-h) - 36px - 58px);overflow:hidden}
+.conv-sidebar{width:300px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden}
+.conv-sidebar-header{padding:14px 16px;border-bottom:1px solid var(--border);flex-shrink:0}
+.conv-search{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:7px 12px;font-size:13px;font-family:inherit;outline:none;color:var(--text)}
+.conv-search:focus{border-color:var(--gold)}
+.conv-filters{display:flex;gap:4px;padding:8px 12px;border-bottom:1px solid var(--border);flex-shrink:0}
+.conv-filter-btn{font-size:11px;padding:3px 10px;border-radius:20px;border:1px solid var(--border);background:var(--surface2);color:var(--text3);cursor:pointer;transition:all .15s}
+.conv-filter-btn.active{background:var(--gold);color:var(--navy);border-color:var(--gold);font-weight:500}
+.conv-list{overflow-y:auto;flex:1}
+.conv-item{padding:12px 14px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s;display:flex;gap:10px;align-items:flex-start}
+.conv-item:hover{background:var(--surface2)}
+.conv-item.active{background:rgba(200,153,42,0.08);border-left:3px solid var(--gold);padding-left:11px}
+.conv-av{width:36px;height:36px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--gold);font-weight:600;flex-shrink:0}
+.conv-body{flex:1;min-width:0}
+.conv-row1{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px}
+.conv-cname{font-size:13px;font-weight:500;color:var(--text)}
+.conv-ts{font-size:10px;color:var(--text3)}
+.conv-preview{font-size:12px;color:var(--text3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.4}
+.conv-unread{min-width:18px;height:18px;background:var(--gold);color:var(--navy);font-size:10px;font-weight:600;border-radius:20px;padding:0 5px;display:flex;align-items:center;justify-content:center;margin-left:auto;flex-shrink:0}
+.conv-channel-icon{font-size:10px;opacity:.6;margin-right:2px}
+.conv-chat-area{flex:1;display:flex;flex-direction:column;overflow:hidden;background:var(--surface2)}
+.conv-chat-header{padding:12px 18px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;flex-shrink:0}
+.conv-chat-name{font-size:14px;font-weight:500}
+.conv-chat-sub{font-size:11px;color:var(--text3)}
+.conv-chat-actions{margin-left:auto;display:flex;gap:6px}
+.conv-messages{flex:1;overflow-y:auto;padding:16px}
+.conv-msg-group{margin-bottom:16px}
+.conv-msg-date{text-align:center;font-size:11px;color:var(--text3);margin-bottom:12px;background:var(--surface);border:1px solid var(--border);display:inline-block;padding:3px 10px;border-radius:20px;left:50%;position:relative;transform:translateX(-50%)}
+.conv-msg{display:flex;gap:8px;margin-bottom:8px}
+.conv-msg.out{flex-direction:row-reverse}
+.conv-msg-av{width:28px;height:28px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--gold);font-weight:600;flex-shrink:0;align-self:flex-end}
+.conv-msg-av.agent{background:var(--gold);color:var(--navy)}
+.conv-bubble{max-width:68%;padding:9px 12px;border-radius:12px;font-size:13px;line-height:1.5;position:relative}
+.conv-bubble.in{background:var(--surface);border:1px solid var(--border);border-radius:0 12px 12px 12px;color:var(--text)}
+.conv-bubble.out{background:var(--navy);color:#fff;border-radius:12px 0 12px 12px}
+.conv-bubble-meta{font-size:10px;color:rgba(255,255,255,.5);text-align:right;margin-top:4px}
+.conv-bubble.in .conv-bubble-meta{color:var(--text3)}
+.conv-channel-tag{font-size:9.5px;padding:2px 6px;border-radius:8px;font-weight:500;margin-bottom:4px;display:inline-block}
+.conv-input-area{padding:12px 16px;background:var(--surface);border-top:1px solid var(--border);flex-shrink:0}
+.conv-input-row{display:flex;gap:8px;align-items:center}
+.conv-channel-sel{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:5px 8px;font-size:12px;color:var(--text);font-family:inherit;outline:none;cursor:pointer}
+.conv-channel-sel:focus{border-color:var(--gold)}
+.conv-textarea{flex:1;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:9px 12px;font-size:13px;font-family:inherit;color:var(--text);outline:none;resize:none;min-height:38px;max-height:100px}
+.conv-textarea:focus{border-color:var(--gold);background:var(--surface)}
+.conv-send-btn{width:38px;height:38px;background:var(--navy);color:var(--gold);border:none;border-radius:8px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
+.conv-send-btn:hover{background:var(--navy-light)}
+.conv-note-bar{display:flex;align-items:center;gap:8px;margin-top:8px;padding-top:8px;border-top:1px solid var(--border)}
+.conv-note-inp{flex:1;background:rgba(200,153,42,.06);border:1px solid rgba(200,153,42,.3);border-radius:6px;padding:6px 10px;font-size:12px;font-family:inherit;color:var(--text);outline:none}
+.conv-note-inp:focus{border-color:var(--gold)}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div id="topbar">
+  <div class="logo-area">
+    <div class="logo-icon">D</div>
+    <div>
+      <div class="logo-text">Dhanam CRM</div>
+      <div class="logo-sub">Investment &amp; Finance</div>
+    </div>
+  </div>
+  <input type="text" id="topbar-search" placeholder="Search leads, loans, branches, investors..." oninput="handleSearch(this.value)">
+  <div class="topbar-right">
+    <div class="tb-badge"><div class="dot" style="background:#4CAF50"></div>Live</div>
+    <div class="notif-btn" onclick="showToast('📋 3 tasks due today · 7 EMI overdue')">🔔<div class="notif-dot"></div></div>
+    <div class="avatar" onclick="showToast('👤 Hema — Admin · HQ Coimbatore')">H</div>
+  </div>
+</div>
+
+<!-- BRANCH BAR -->
+<div id="branch-bar">
+  <span class="branch-label">Branch</span>
+  <select id="branch-select" onchange="switchBranch(this.value)">
+    <option value="hq">🏢 Corporate HQ — Coimbatore Urban</option>
+    <optgroup label="── Coimbatore">
+      <option value="ganapathy">Ganapathy</option>
+      <option value="gandhipuram">Gandhipuram</option>
+      <option value="irugur">Irugur</option>
+      <option value="karanampettai">Karanampettai</option>
+      <option value="kinathukadavu">Kinathukadavu</option>
+      <option value="thondamuthur">Thondamuthur</option>
+      <option value="annur">Annur</option>
+      <option value="mallumichampatty">Mallumichampatty</option>
+    </optgroup>
+    <optgroup label="── Nilgiris">
+      <option value="ooty">Ooty</option>
+    </optgroup>
+    <optgroup label="── Erode">
+      <option value="erode">Erode</option>
+      <option value="gobichettipalayam">Gobichettipalayam</option>
+      <option value="anthiyur">Anthiyur</option>
+      <option value="nambiyur">Nambiyur</option>
+    </optgroup>
+    <optgroup label="── Tiruppur">
+      <option value="dharapuram">Dharapuram</option>
+      <option value="palladam">Palladam</option>
+    </optgroup>
+    <optgroup label="── Salem">
+      <option value="salem">Salem City</option>
+      <option value="athavathur">Athavathur</option>
+      <option value="kondalampatti">Kondalampatti</option>
+      <option value="sankari">Sankari</option>
+      <option value="vazhapadi">Vazhapadi</option>
+      <option value="yercaud">Yercaud</option>
+      <option value="sevaipettai">Sevaipettai</option>
+    </optgroup>
+    <optgroup label="── Namakkal">
+      <option value="paramathivelur">Paramathivelur</option>
+      <option value="rasipuram">Rasipuram</option>
+      <option value="tiruchengode">Tiruchengode</option>
+    </optgroup>
+    <optgroup label="── Karur">
+      <option value="kulithalai">Kulithalai</option>
+    </optgroup>
+    <optgroup label="── Krishnagiri / Dharmapuri">
+      <option value="hosur">Hosur</option>
+      <option value="bargur">Bargur</option>
+      <option value="denkanikottai">Denkanikottai</option>
+      <option value="harur">Harur</option>
+      <option value="palacode">Palacode</option>
+      <option value="nallampalli">Nallampalli</option>
+    </optgroup>
+    <optgroup label="── Trichy">
+      <option value="somarasampettai">Somarasampettai</option>
+      <option value="kattuputhur">Kattuputhur</option>
+      <option value="musiri">Musiri</option>
+    </optgroup>
+    <optgroup label="── Madurai / Sivaganga">
+      <option value="chekkanoorani">Chekkanoorani</option>
+      <option value="rrnagar">RR Nagar</option>
+      <option value="thirupuvanam">Thirupuvanam</option>
+    </optgroup>
+    <optgroup label="── Dindigul">
+      <option value="dindigul">Dindigul</option>
+      <option value="kodaikanal">Kodaikanal</option>
+    </optgroup>
+    <optgroup label="── Cuddalore">
+      <option value="virudhachalam">Virudhachalam</option>
+    </optgroup>
+    <optgroup label="── Tirunelveli / Tenkasi">
+      <option value="palayamkottai">Palayamkottai</option>
+      <option value="ambasamudram">Ambasamudram</option>
+      <option value="alangulam">Alangulam</option>
+      <option value="sankarankovil">Sankarankovil</option>
+      <option value="surandai">Surandai</option>
+      <option value="tenkasi">Tenkasi</option>
+    </optgroup>
+    <optgroup label="── Virudhunagar / Others">
+      <option value="kariyapatti">Kariyapatti</option>
+    </optgroup>
+    <optgroup label="── 📍 Upcoming Branches">
+      <option value="up1">Chennai (Upcoming)</option>
+      <option value="up2">Madurai HQ (Upcoming)</option>
+      <option value="up3">Vellore (Upcoming)</option>
+      <option value="up4">Pudukkottai (Upcoming)</option>
+      <option value="up5">Nagercoil (Upcoming)</option>
+    </optgroup>
+  </select>
+  <span class="branch-badge" id="active-branch-badge">HQ</span>
+  <span style="font-size:11px;color:rgba(255,255,255,0.4);margin-left:8px" id="branch-email">headoffice@dhanam.finance</span>
+</div>
+
+<!-- LAYOUT -->
+<div id="layout">
+
+<!-- SIDEBAR -->
+<div id="sidebar">
+  <div class="sidebar-section">
+    <div class="sidebar-section-label">Main</div>
+    <div class="nav-item active" onclick="nav('dashboard')"><span class="nav-icon">⬛</span><span>Dashboard</span></div>
+    <div class="nav-item" onclick="nav('leads')"><span class="nav-icon">👥</span><span>Leads</span><span class="nav-badge">24</span></div>
+    <div class="nav-item" onclick="nav('contacts')"><span class="nav-icon">👤</span><span>Contacts</span></div>
+    <div class="nav-item" onclick="nav('pipeline')"><span class="nav-icon">📊</span><span>Pipeline</span></div>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-section-label">Loan Products</div>
+    <div class="nav-item" onclick="nav('loan-products')"><span class="nav-icon">📋</span><span>All Products</span></div>
+    <div class="nav-item" onclick="nav('gold')"><span class="nav-icon">🪙</span><span>Gold Loans</span></div>
+    <div class="nav-item" onclick="nav('mortgage')"><span class="nav-icon">🏠</span><span>Mortgage / LAP</span></div>
+    <div class="nav-item" onclick="nav('sme')"><span class="nav-icon">🏭</span><span>SME Loans</span></div>
+    <div class="nav-item" onclick="nav('emi')"><span class="nav-icon">📅</span><span>EMI Tracker</span></div>
+    <div class="nav-item" onclick="nav('collections')"><span class="nav-icon">💼</span><span>Collections</span></div>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-section-label">Investments</div>
+    <div class="nav-item" onclick="nav('investments')"><span class="nav-icon">📈</span><span>NCD Investments</span><span class="nav-badge">New</span></div>
+    <div class="nav-item" onclick="nav('investors')"><span class="nav-icon">👔</span><span>Investors</span></div>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-section-label">Communication</div>
+    <div class="nav-item" onclick="nav('calling')"><span class="nav-icon">📞</span><span>Calling</span><span class="nav-badge">3</span></div>
+    <div class="nav-item" onclick="nav('conversations')"><span class="nav-icon">🗨️</span><span>Conversations</span><span class="nav-badge">7</span></div>
+    <div class="nav-item" onclick="nav('whatsapp')"><span class="nav-icon">💬</span><span>WhatsApp</span><span class="nav-badge">5</span></div>
+    <div class="nav-item" onclick="nav('sms')"><span class="nav-icon">📱</span><span>SMS</span></div>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-section-label">Operations</div>
+    <div class="nav-item" onclick="nav('branches')"><span class="nav-icon">🏢</span><span>Sub-Accounts</span></div>
+    <div class="nav-item" onclick="nav('calendar')"><span class="nav-icon">📆</span><span>Calendar</span></div>
+    <div class="nav-item" onclick="nav('tasks')"><span class="nav-icon">✅</span><span>Tasks</span><span class="nav-badge">8</span></div>
+    <div class="nav-item" onclick="nav('reports')"><span class="nav-icon">📉</span><span>Reports</span></div>
+    <div class="nav-item" onclick="nav('settings')"><span class="nav-icon">⚙️</span><span>Settings</span></div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div id="main">
+  <div id="page-header">
+    <div>
+      <div id="page-title">Dashboard</div>
+      <div id="page-subtitle">Welcome back, Hema · Wed 15 Apr 2026 · CoR No: N-07.00831</div>
+    </div>
+    <div class="page-actions" id="page-actions">
+      <button class="btn btn-secondary btn-sm" onclick="showModal('quick-add')">+ Quick Add</button>
+      <button class="btn btn-primary btn-sm" onclick="showModal('new-lead')">+ New Lead</button>
+    </div>
+  </div>
+
+  <div id="content">
+
+<!-- ==================== DASHBOARD ==================== -->
+<div id="page-dashboard" class="page active">
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-label">Total AUM</div><div class="stat-value">₹42.6 Cr</div><div class="stat-meta up">↑ 8.2% vs last month</div></div>
+    <div class="stat-card"><div class="stat-label">Active Loans</div><div class="stat-value">1,248</div><div class="stat-meta up">↑ 34 new this week</div></div>
+    <div class="stat-card"><div class="stat-label">NCD Investors</div><div class="stat-value">312</div><div class="stat-meta">₹9.4 Cr invested</div></div>
+    <div class="stat-card"><div class="stat-label">Pending Apps</div><div class="stat-value">87</div><div class="stat-meta down">↓ 12 from yesterday</div></div>
+    <div class="stat-card"><div class="stat-label">Collections Today</div><div class="stat-value">₹18.4 L</div><div class="stat-meta up">94% collection rate</div></div>
+    <div class="stat-card"><div class="stat-label">GNPA</div><div class="stat-value">2.1%</div><div class="stat-meta">Active branches: 50+</div></div>
+  </div>
+  <div class="sg2">
+    <div class="card">
+      <div class="card-title">April 2026 — Disbursements <span style="font-size:11px;color:var(--text3);font-weight:400">₹ in Lakhs</span></div>
+      <div class="bar-chart" id="dash-chart"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Portfolio Mix</div>
+      <div style="display:flex;align-items:center;gap:20px">
+        <svg width="100" height="100" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="35" fill="none" stroke="var(--border)" stroke-width="20"/>
+          <circle cx="50" cy="50" r="35" fill="none" stroke="#C8992A" stroke-width="20" stroke-dasharray="88 132" stroke-dashoffset="-13" transform="rotate(-90 50 50)"/>
+          <circle cx="50" cy="50" r="35" fill="none" stroke="#1D7A6E" stroke-width="20" stroke-dasharray="52 168" stroke-dashoffset="-101" transform="rotate(-90 50 50)"/>
+          <circle cx="50" cy="50" r="35" fill="none" stroke="#1A2F5E" stroke-width="20" stroke-dasharray="33 187" stroke-dashoffset="-153" transform="rotate(-90 50 50)"/>
+          <circle cx="50" cy="50" r="35" fill="none" stroke="#C87A1A" stroke-width="20" stroke-dasharray="27 193" stroke-dashoffset="-186" transform="rotate(-90 50 50)"/>
+        </svg>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;align-items:center;gap:7px;font-size:12px"><div style="width:10px;height:10px;border-radius:50%;background:#C8992A;flex-shrink:0"></div>Gold Loans — 40%</div>
+          <div style="display:flex;align-items:center;gap:7px;font-size:12px"><div style="width:10px;height:10px;border-radius:50%;background:#1D7A6E;flex-shrink:0"></div>Mortgage/LAP — 24%</div>
+          <div style="display:flex;align-items:center;gap:7px;font-size:12px"><div style="width:10px;height:10px;border-radius:50%;background:#1A2F5E;flex-shrink:0"></div>SME Loans — 15%</div>
+          <div style="display:flex;align-items:center;gap:7px;font-size:12px"><div style="width:10px;height:10px;border-radius:50%;background:#C87A1A;flex-shrink:0"></div>NCD Portfolio — 12%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sg2">
+    <div class="card">
+      <div class="card-title">Recent Activity</div>
+      <div class="act-item"><div class="act-icon" style="background:var(--gold-light)">💰</div><div><div class="act-text"><strong>Ramesh Kumar</strong> — Gold Loan ₹3.5L disbursed · Ganapathy Branch</div><div class="act-time">10 mins ago</div></div></div>
+      <div class="act-item"><div class="act-icon" style="background:var(--teal-light)">📝</div><div><div class="act-text"><strong>Meena Devi</strong> — Mortgage LAP ₹18L application submitted</div><div class="act-time">32 mins ago</div></div></div>
+      <div class="act-item"><div class="act-icon" style="background:var(--red-light)">⚠️</div><div><div class="act-text"><strong>Selvam Enterprises</strong> — EMI DPD-3 alert · Erode Branch</div><div class="act-time">1 hr ago</div></div></div>
+      <div class="act-item"><div class="act-icon" style="background:var(--green-light)">✅</div><div><div class="act-text"><strong>Priya Textiles</strong> — NCD Cumulative 36M · ₹5L investment confirmed</div><div class="act-time">2 hrs ago</div></div></div>
+      <div class="act-item"><div class="act-icon" style="background:var(--amber-light)">🏢</div><div><div class="act-text"><strong>Hosur Branch</strong> — New sub-account activated · 2 staff added</div><div class="act-time">3 hrs ago</div></div></div>
+    </div>
+    <div class="card">
+      <div class="card-title">DPD Overview</div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div><div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text3);margin-bottom:4px"><span>Current (DPD 0)</span><span>91%</span></div><div class="pb"><div class="pf green" style="width:91%"></div></div></div>
+        <div><div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text3);margin-bottom:4px"><span>DPD 1–30</span><span>6.6%</span></div><div class="pb"><div class="pf" style="width:6.6%"></div></div></div>
+        <div><div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text3);margin-bottom:4px"><span>DPD 31–90</span><span>2.1%</span></div><div class="pb"><div class="pf red" style="width:30%"></div></div></div>
+        <div><div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text3);margin-bottom:4px"><span>NPA (90+)</span><span>0.3%</span></div><div class="pb"><div class="pf red" style="width:10%"></div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== LEADS ==================== -->
+<div id="page-leads" class="page">
+  <div class="tabs" id="leads-tabs">
+    <div class="tab active" onclick="switchTab(this)">All Leads (24)</div>
+    <div class="tab" onclick="switchTab(this)">New (8)</div>
+    <div class="tab" onclick="switchTab(this)">Contacted (11)</div>
+    <div class="tab" onclick="switchTab(this)">Qualified (5)</div>
+    <div class="tab" onclick="switchTab(this)">Lost (3)</div>
+  </div>
+  <div class="card">
+    <div class="card-title">Leads
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <select style="font-size:12px;padding:4px 8px;width:auto"><option>All Products</option><option>Gold Loan</option><option>Mortgage/LAP</option><option>SME Loan</option><option>NCD Investment</option></select>
+        <select style="font-size:12px;padding:4px 8px;width:auto"><option>All Sources</option><option>WhatsApp</option><option>Walk-in</option><option>Referral</option><option>Website</option></select>
+        <select style="font-size:12px;padding:4px 8px;width:auto" id="leads-branch-filter"><option>All Branches</option></select>
+        <button class="btn btn-primary btn-sm" onclick="showModal('new-lead')">+ New Lead</button>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th><input type="checkbox"></th><th>Name</th><th>Mobile</th><th>Product</th><th>Amount</th><th>Source</th><th>Branch</th><th>Status</th><th>Assigned</th><th>Date</th><th>Notes</th><th>Actions</th></tr></thead>
+        <tbody id="leads-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== CONTACTS ==================== -->
+<div id="page-contacts" class="page">
+  <div class="card">
+    <div class="card-title">Contacts — 1,248 Total
+      <div style="display:flex;gap:8px"><input type="text" placeholder="Search..." style="width:180px;font-size:12px;padding:4px 10px"><button class="btn btn-primary btn-sm" onclick="showModal('new-contact')">+ New Contact</button></div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Name</th><th>Mobile</th><th>City</th><th>Branch</th><th>Active Loan</th><th>Outstanding</th><th>CIBIL</th><th>Status</th><th>Action</th></tr></thead>
+        <tbody id="contacts-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== PIPELINE ==================== -->
+<div id="page-pipeline" class="page">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+    <select style="font-size:13px;padding:5px 10px"><option>Gold Loan Pipeline</option><option>Mortgage Pipeline</option><option>SME Loan Pipeline</option></select>
+    <button class="btn btn-primary btn-sm" onclick="showModal('new-lead')">+ Add Deal</button>
+    <span style="font-size:12px;color:var(--text3);margin-left:auto">Pipeline Value: <strong>₹4.2 Cr</strong></span>
+  </div>
+  <div class="pipeline-wrap" id="pipeline-board"></div>
+</div>
+
+<!-- ==================== LOAN PRODUCTS ==================== -->
+<div id="page-loan-products" class="page">
+  <div class="sg3" style="margin-bottom:0">
+    <div class="lp-card">
+      <div class="lp-header" style="background:linear-gradient(135deg,#7a5210,#C8992A)">
+        <div><div class="lp-name" style="color:#fff">Gold Loan</div><div class="lp-tag" style="color:rgba(255,255,255,.6)">Instant disbursal · Secured</div></div>
+        <div class="lp-icon" style="background:rgba(255,255,255,.15)">🪙</div>
+      </div>
+      <div class="lp-body" style="padding-top:14px">
+        <div class="lp-specs">
+          <div class="lp-row"><span>Loan Amount</span><span>Up to ₹1 Crore</span></div>
+          <div class="lp-row"><span>LTV (up to ₹2.5L)</span><span>85%</span></div>
+          <div class="lp-row"><span>LTV (₹2.5L–₹5L)</span><span>80%</span></div>
+          <div class="lp-row"><span>LTV (above ₹5L)</span><span>75%</span></div>
+          <div class="lp-row"><span>Tenure</span><span>Flexible (12 months)</span></div>
+          <div class="lp-row"><span>Gold Accepted</span><span>18, 20, 22, 24 KT</span></div>
+          <div class="lp-row"><span>Disbursal</span><span>Immediate</span></div>
+          <div class="lp-row"><span>Repayment</span><span>Bullet / EMI / UPI</span></div>
+          <div class="lp-row"><span>Docs Required</span><span>Aadhaar + Photo</span></div>
+          <div class="lp-row"><span>Prepayment Penalty</span><span>None</span></div>
+        </div>
+        <button class="btn btn-primary" style="width:100%;margin-top:12px" onclick="nav('gold')">View Gold Loans →</button>
+      </div>
+    </div>
+    <div class="lp-card">
+      <div class="lp-header" style="background:linear-gradient(135deg,#0D1B3E,#1A2F5E)">
+        <div><div class="lp-name" style="color:#fff">Mortgage / LAP</div><div class="lp-tag" style="color:rgba(255,255,255,.6)">Loan Against Property</div></div>
+        <div class="lp-icon" style="background:rgba(255,255,255,.1)">🏠</div>
+      </div>
+      <div class="lp-body" style="padding-top:14px">
+        <div class="lp-specs">
+          <div class="lp-row"><span>Min Amount</span><span>₹1 Lakh</span></div>
+          <div class="lp-row"><span>Max Amount</span><span>₹5 Crore</span></div>
+          <div class="lp-row"><span>Tenure</span><span>12 – 180 months</span></div>
+          <div class="lp-row"><span>Repayment</span><span>EMI via NACH / PDC</span></div>
+          <div class="lp-row"><span>Sanction Time</span><span>2–7 working days</span></div>
+          <div class="lp-row"><span>Accepted Properties</span><span>Residential / Commercial</span></div>
+          <div class="lp-row"><span>Not Accepted</span><span>Agriculture / Industrial</span></div>
+          <div class="lp-row"><span>KYC Docs</span><span>Aadhaar, PAN, ITR</span></div>
+          <div class="lp-row"><span>Property Docs</span><span>Sale deed, Tax receipt</span></div>
+          <div class="lp-row"><span>Process</span><span>MODT Registration</span></div>
+        </div>
+        <button class="btn btn-primary" style="width:100%;margin-top:12px" onclick="nav('mortgage')">View Mortgage Loans →</button>
+      </div>
+    </div>
+    <div class="lp-card">
+      <div class="lp-header" style="background:linear-gradient(135deg,#0F5940,#1D7A6E)">
+        <div><div class="lp-name" style="color:#fff">SME / Business Loan</div><div class="lp-tag" style="color:rgba(255,255,255,.6)">Supply chain & working capital</div></div>
+        <div class="lp-icon" style="background:rgba(255,255,255,.1)">🏭</div>
+      </div>
+      <div class="lp-body" style="padding-top:14px">
+        <div class="lp-specs">
+          <div class="lp-row"><span>Loan Purpose</span><span>Business growth / WC</span></div>
+          <div class="lp-row"><span>Collateral</span><span>Property / Gold / Stock</span></div>
+          <div class="lp-row"><span>CIBIL Required</span><span>Min 650+</span></div>
+          <div class="lp-row"><span>Repayment</span><span>EMI via NACH</span></div>
+          <div class="lp-row"><span>KYC Docs</span><span>Aadhaar, PAN, GST</span></div>
+          <div class="lp-row"><span>Income Docs</span><span>ITR + Bank 6M</span></div>
+          <div class="lp-row"><span>Business Proof</span><span>Reg. cert / GST cert</span></div>
+          <div class="lp-row"><span>Sanction Time</span><span>3–7 working days</span></div>
+          <div class="lp-row"><span>Interest Rate</span><span>Competitive</span></div>
+          <div class="lp-row"><span>Supply Chain</span><span>Supported</span></div>
+        </div>
+        <button class="btn btn-primary" style="width:100%;margin-top:12px" onclick="nav('sme')">View SME Loans →</button>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:20px">
+    <div class="card">
+      <div class="card-title">EMI Calculator — All Products</div>
+      <div class="form-3">
+        <div class="fg"><label>Loan Amount (₹)</label><input type="number" id="calc-amt" value="1000000" oninput="calcEMI()"></div>
+        <div class="fg"><label>Interest Rate (% p.a.)</label><input type="number" id="calc-rate" value="14" step="0.1" oninput="calcEMI()"></div>
+        <div class="fg"><label>Tenure (Months)</label><input type="number" id="calc-tenure" value="60" oninput="calcEMI()"></div>
+      </div>
+      <div class="calc-result" id="calc-result">
+        <div style="display:flex;gap:24px;flex-wrap:wrap">
+          <div><div class="stat-label">Monthly EMI</div><div id="emi-val" style="font-size:24px;font-weight:500;font-family:'DM Serif Display',serif">₹23,268</div></div>
+          <div><div class="stat-label">Total Interest</div><div id="int-val" style="font-size:18px;font-weight:500">₹3,96,080</div></div>
+          <div><div class="stat-label">Total Payable</div><div id="total-val" style="font-size:18px;font-weight:500">₹13,96,080</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== GOLD LOANS ==================== -->
+<div id="page-gold" class="page">
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-label">Gold Pledged</div><div class="stat-value">842 g</div></div>
+    <div class="stat-card"><div class="stat-label">Active Loans</div><div class="stat-value">624</div></div>
+    <div class="stat-card"><div class="stat-label">Gold AUM</div><div class="stat-value">₹17.1 Cr</div></div>
+    <div class="stat-card"><div class="stat-label">Avg LTV</div><div class="stat-value">78%</div></div>
+    <div class="stat-card"><div class="stat-label">Gold Rate Today</div><div class="stat-value">₹6,200/g</div></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Gold Loan Portfolio
+      <button class="btn btn-primary btn-sm" onclick="showModal('new-gold')">+ New Gold Loan</button>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Customer</th><th>Branch</th><th>Ornaments</th><th>Gross Wt</th><th>Net Wt</th><th>Gold Rate</th><th>Loan Amt</th><th>LTV</th><th>Tenure</th><th>Rate</th><th>Status</th><th>Action</th></tr></thead>
+        <tbody id="gold-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== MORTGAGE ==================== -->
+<div id="page-mortgage" class="page">
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-label">Active Mortgages</div><div class="stat-value">196</div></div>
+    <div class="stat-card"><div class="stat-label">Mortgage AUM</div><div class="stat-value">₹11.5 Cr</div></div>
+    <div class="stat-card"><div class="stat-label">Avg Ticket Size</div><div class="stat-value">₹58.7 L</div></div>
+    <div class="stat-card"><div class="stat-label">Max Available</div><div class="stat-value">₹5 Cr</div></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Mortgage / LAP Applications
+      <button class="btn btn-primary btn-sm" onclick="showModal('new-mortgage')">+ New Mortgage</button>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>App ID</th><th>Customer</th><th>Branch</th><th>Property Type</th><th>Loan Amt</th><th>Tenure</th><th>EMI</th><th>Stage</th><th>CIBIL</th><th>Status</th><th>Action</th></tr></thead>
+        <tbody id="mortgage-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SME ==================== -->
+<div id="page-sme" class="page">
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-label">Active SME Loans</div><div class="stat-value">428</div></div>
+    <div class="stat-card"><div class="stat-label">SME AUM</div><div class="stat-value">₹6.4 Cr</div></div>
+    <div class="stat-card"><div class="stat-label">Avg SME Ticket</div><div class="stat-value">₹14.9 L</div></div>
+    <div class="stat-card"><div class="stat-label">GNPA (SME)</div><div class="stat-value">2.4%</div></div>
+  </div>
+  <div class="card">
+    <div class="card-title">SME Loan Portfolio
+      <button class="btn btn-primary btn-sm" onclick="showModal('new-lead')">+ New Application</button>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Loan ID</th><th>Business Name</th><th>Branch</th><th>Loan Amt</th><th>Purpose</th><th>Collateral</th><th>EMI</th><th>CIBIL</th><th>DPD</th><th>Status</th><th>Action</th></tr></thead>
+        <tbody id="sme-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== EMI TRACKER ==================== -->
+<div id="page-emi" class="page">
+  <div class="stats-grid" style="margin-bottom:16px">
+    <div class="stat-card"><div class="stat-label">Due Today</div><div class="stat-value">₹2.14 Cr</div></div>
+    <div class="stat-card"><div class="stat-label">Collected</div><div class="stat-value" style="color:var(--green)">₹2.01 Cr</div></div>
+    <div class="stat-card"><div class="stat-label">Overdue</div><div class="stat-value" style="color:var(--red)">₹13.2 L</div></div>
+    <div class="stat-card"><div class="stat-label">Collection Rate</div><div class="stat-value">94%</div></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Overdue EMIs
+      <button class="btn btn-secondary btn-sm" onclick="showToast('📲 WhatsApp reminders sent to 7 overdue accounts')">📲 Bulk WhatsApp</button>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Loan ID</th><th>Customer</th><th>Branch</th><th>Product</th><th>EMI Amt</th><th>Due Date</th><th>DPD</th><th>Outstanding</th><th>Status</th><th>Action</th></tr></thead>
+        <tbody id="emi-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== COLLECTIONS ==================== -->
+<div id="page-collections" class="page">
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-label">Today Target</div><div class="stat-value">₹24 L</div></div>
+    <div class="stat-card"><div class="stat-label">Collected</div><div class="stat-value" style="color:var(--green)">₹18.4 L</div></div>
+    <div class="stat-card"><div class="stat-label">Pending</div><div class="stat-value" style="color:var(--red)">₹5.6 L</div></div>
+    <div class="stat-card"><div class="stat-label">Active Agents</div><div class="stat-value">6</div></div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <div class="card-title">Collection Team Performance</div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Agent</th><th>Branch</th><th>Target</th><th>Collected</th><th>Rate</th><th>Visits</th><th>DPD Resolved</th><th>Performance</th></tr></thead>
+      <tbody>
+        <tr><td>Karthik R</td><td>Ganapathy</td><td>₹6L</td><td>₹5.8L</td><td><span class="badge bgreen">97%</span></td><td>12</td><td>8</td><td><div class="pb" style="width:80px"><div class="pf green" style="width:97%"></div></div></td></tr>
+        <tr><td>Preethi S</td><td>Gandhipuram</td><td>₹5L</td><td>₹4.2L</td><td><span class="badge bamber">84%</span></td><td>9</td><td>5</td><td><div class="pb" style="width:80px"><div class="pf" style="width:84%"></div></div></td></tr>
+        <tr><td>Murugan K</td><td>Erode</td><td>₹6L</td><td>₹4.8L</td><td><span class="badge bamber">80%</span></td><td>10</td><td>6</td><td><div class="pb" style="width:80px"><div class="pf" style="width:80%"></div></div></td></tr>
+        <tr><td>Deepa M</td><td>Salem</td><td>₹4L</td><td>₹2.2L</td><td><span class="badge bred">55%</span></td><td>7</td><td>2</td><td><div class="pb" style="width:80px"><div class="pf red" style="width:55%"></div></div></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</div>
+
+<!-- ==================== NCD INVESTMENTS ==================== -->
+<div id="page-investments" class="page">
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-label">Total NCD Raised</div><div class="stat-value">₹9.4 Cr</div><div class="stat-meta up">↑ 12% this quarter</div></div>
+    <div class="stat-card"><div class="stat-label">Active Investors</div><div class="stat-value">312</div></div>
+    <div class="stat-card"><div class="stat-label">Interest Payable (Apr)</div><div class="stat-value">₹94.8 L</div></div>
+    <div class="stat-card"><div class="stat-label">Maturity This Month</div><div class="stat-value">₹1.2 Cr</div></div>
+  </div>
+  <div style="margin-bottom:16px;font-size:13px;color:var(--text3);line-height:1.6;background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--gold);padding:12px 16px;border-radius:8px">
+    <strong style="color:var(--text)">CoR No: N-07.00831</strong> · Issuer: Dhanam Investment &amp; Finance Pvt. Ltd. · Secured, Redeemable Non-Convertible Debentures · Face Value: ₹1,00,000 per NCD · Registrar: Integrated Registry Management Services · Trustee: Catalyst Trusteeship Limited · Depository: NSDL &amp; CDSL
+  </div>
+  <h3 style="font-size:14px;font-weight:500;margin-bottom:14px;color:var(--text2)">NCD Schemes — Choose your investment</h3>
+  <div class="ncd-grid">
+    <div class="ncd-card">
+      <div class="ncd-card-header featured">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div><div class="ncd-name">Doubling Scheme</div><div class="ncd-sub">Best-in-class effective yield</div></div>
+          <span style="background:rgba(255,255,255,.2);color:#fff;font-size:10px;padding:3px 8px;border-radius:10px;font-weight:500">FEATURED</span>
+        </div>
+      </div>
+      <div class="ncd-body">
+        <div class="ncd-rate">20.00%</div>
+        <div class="ncd-rate-label">Effective yield · 60 months</div>
+        <table class="ncd-table">
+          <tr><th>Tenure</th><th>Individual</th><th>Senior Citizen</th></tr>
+          <tr><td>60 Months</td><td><strong>20.00%</strong></td><td><strong>20.00%</strong></td></tr>
+        </table>
+        <div style="font-size:11px;color:var(--text3);margin-top:8px;line-height:1.5">Principal doubles at maturity · Lump sum payout · Min ₹1 lakh</div>
+        <button class="btn btn-primary btn-sm" style="width:100%;margin-top:10px" onclick="showModal('new-investment')">Invest Now</button>
+      </div>
+    </div>
+    <div class="ncd-card">
+      <div class="ncd-card-header"><div class="ncd-name">Cumulative Scheme</div><div class="ncd-sub">Compounding at maturity</div></div>
+      <div class="ncd-body">
+        <div class="ncd-rate">13.50%</div>
+        <div class="ncd-rate-label">Max yield · 36 months</div>
+        <table class="ncd-table">
+          <tr><th>Tenure</th><th>Individual</th><th>Senior Citizen</th></tr>
+          <tr><td>13 Months</td><td>12.50%</td><td>13.00%</td></tr>
+          <tr><td>24 Months</td><td>13.00%</td><td>13.50%</td></tr>
+          <tr><td>36 Months</td><td>13.50%</td><td>14.00%</td></tr>
+        </table>
+        <div style="font-size:11px;color:var(--text3);margin-top:8px">Interest compounding · Lump sum at maturity · Min ₹1 lakh</div>
+        <button class="btn btn-secondary btn-sm" style="width:100%;margin-top:10px" onclick="showModal('new-investment')">Invest →</button>
+      </div>
+    </div>
+    <div class="ncd-card">
+      <div class="ncd-card-header"><div class="ncd-name">Annual Scheme</div><div class="ncd-sub">Yearly payout</div></div>
+      <div class="ncd-body">
+        <div class="ncd-rate">13.00%</div>
+        <div class="ncd-rate-label">Max yield · 36 months</div>
+        <table class="ncd-table">
+          <tr><th>Tenure</th><th>Individual</th><th>Senior Citizen</th></tr>
+          <tr><td>24 Months</td><td>12.50%</td><td>13.00%</td></tr>
+          <tr><td>36 Months</td><td>13.00%</td><td>13.50%</td></tr>
+        </table>
+        <div style="font-size:11px;color:var(--text3);margin-top:8px">Annual interest payouts · Min ₹1 lakh</div>
+        <button class="btn btn-secondary btn-sm" style="width:100%;margin-top:10px" onclick="showModal('new-investment')">Invest →</button>
+      </div>
+    </div>
+    <div class="ncd-card">
+      <div class="ncd-card-header"><div class="ncd-name">Monthly Scheme</div><div class="ncd-sub">Regular monthly income</div></div>
+      <div class="ncd-body">
+        <div class="ncd-rate">12.50%</div>
+        <div class="ncd-rate-label">Max yield · 60 months</div>
+        <table class="ncd-table">
+          <tr><th>Tenure</th><th>Individual</th><th>Senior Citizen</th></tr>
+          <tr><td>13 Months</td><td>11.00%</td><td>11.50%</td></tr>
+          <tr><td>24 Months</td><td>11.50%</td><td>12.00%</td></tr>
+          <tr><td>36 Months</td><td>12.00%</td><td>12.50%</td></tr>
+          <tr><td>60 Months</td><td>12.50%</td><td>13.00%</td></tr>
+        </table>
+        <div style="font-size:11px;color:var(--text3);margin-top:8px">Monthly interest payments · Min ₹1 lakh</div>
+        <button class="btn btn-secondary btn-sm" style="width:100%;margin-top:10px" onclick="showModal('new-investment')">Invest →</button>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">NCD Investment Process — 6 Steps</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px">
+      <div style="flex:1;min-width:140px;border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center"><div style="font-size:20px;font-weight:500;color:var(--gold);font-family:'DM Serif Display',serif">1</div><div style="font-size:12px;font-weight:500;margin:4px 0">Contact IR Team</div><div style="font-size:11px;color:var(--text3)">1800 2025 180</div></div>
+      <div style="flex:1;min-width:140px;border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center"><div style="font-size:20px;font-weight:500;color:var(--gold);font-family:'DM Serif Display',serif">2</div><div style="font-size:12px;font-weight:500;margin:4px 0">Select Scheme</div><div style="font-size:11px;color:var(--text3)">13–60 months</div></div>
+      <div style="flex:1;min-width:140px;border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center"><div style="font-size:20px;font-weight:500;color:var(--gold);font-family:'DM Serif Display',serif">3</div><div style="font-size:12px;font-weight:500;margin:4px 0">Submit KYC</div><div style="font-size:11px;color:var(--text3)">PAN + Demat mandatory</div></div>
+      <div style="flex:1;min-width:140px;border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center"><div style="font-size:20px;font-weight:500;color:var(--gold);font-family:'DM Serif Display',serif">4</div><div style="font-size:12px;font-weight:500;margin:4px 0">Transfer Funds</div><div style="font-size:11px;color:var(--text3)">NEFT/RTGS/Cheque</div></div>
+      <div style="flex:1;min-width:140px;border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center"><div style="font-size:20px;font-weight:500;color:var(--gold);font-family:'DM Serif Display',serif">5</div><div style="font-size:12px;font-weight:500;margin:4px 0">NCDs Allotted</div><div style="font-size:11px;color:var(--text3)">Demat account · ISIN</div></div>
+      <div style="flex:1;min-width:140px;border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center"><div style="font-size:20px;font-weight:500;color:var(--gold);font-family:'DM Serif Display',serif">6</div><div style="font-size:12px;font-weight:500;margin:4px 0">Receive Payouts</div><div style="font-size:11px;color:var(--text3)">Monthly/Annual/Maturity</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== INVESTORS ==================== -->
+<div id="page-investors" class="page">
+  <div class="card">
+    <div class="card-title">NCD Investor Registry
+      <button class="btn btn-primary btn-sm" onclick="showModal('new-investment')">+ New Investment</button>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Investor Name</th><th>Mobile</th><th>Scheme</th><th>Amount</th><th>Tenure</th><th>Rate</th><th>Start Date</th><th>Maturity</th><th>Status</th><th>Action</th></tr></thead>
+        <tbody id="investors-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== CALLING ==================== -->
+<div id="page-calling" class="page" style="padding:0;margin:-20px -24px;overflow:hidden">
+  <div class="calling-layout">
+    <!-- Call list -->
+    <div class="call-list-panel">
+      <div class="call-list-header">
+        <span style="font-size:13px;font-weight:500">Call Log</span>
+        <div style="display:flex;gap:6px">
+          <button class="btn btn-outline btn-sm" onclick="showDialPad()">⌨️ Dial</button>
+          <button class="btn btn-primary btn-sm" onclick="startCall('Ramesh Kumar','RK','Gold Loan')">+ Call</button>
+        </div>
+      </div>
+      <div style="padding:8px 12px;border-bottom:1px solid var(--border)">
+        <div style="display:flex;gap:4px">
+          <button class="conv-filter-btn active" onclick="filterCalls('all',this)">All</button>
+          <button class="conv-filter-btn" onclick="filterCalls('inbound',this)">Inbound</button>
+          <button class="conv-filter-btn" onclick="filterCalls('outbound',this)">Outbound</button>
+          <button class="conv-filter-btn" onclick="filterCalls('missed',this)">Missed</button>
+        </div>
+      </div>
+      <div class="call-list-scroll" id="call-list-scroll"></div>
+    </div>
+
+    <!-- Main call area -->
+    <div class="call-detail-panel" id="call-detail-panel">
+      <!-- Dial pad (default) -->
+      <div id="dialpad-view" style="display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;padding:24px;gap:20px">
+        <div style="text-align:center;margin-bottom:4px">
+          <div style="font-size:15px;font-weight:500;color:var(--text);margin-bottom:4px">Quick Dial</div>
+          <div style="font-size:12px;color:var(--text3)">Enter number or select a contact from the log</div>
+        </div>
+        <div class="dialpad">
+          <div class="dialpad-display" id="dialpad-display">_</div>
+          <div class="dialpad-grid" id="dialpad-grid"></div>
+          <div style="display:flex;gap:8px">
+            <button class="btn btn-outline" style="flex:1" onclick="dialpadClear()">⌫</button>
+            <button class="btn btn-primary" style="flex:2" onclick="startCallFromDial()">📞 Call</button>
+          </div>
+        </div>
+        <!-- Recent quick contacts -->
+        <div style="width:280px">
+          <div style="font-size:11px;color:var(--text3);font-weight:500;text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px">Recent Contacts</div>
+          <div style="display:flex;flex-direction:column;gap:6px" id="quick-contacts"></div>
+        </div>
+      </div>
+
+      <!-- Active call screen (hidden by default) -->
+      <div id="active-call-view" class="active-call-screen" style="display:none">
+        <div class="call-contact-av" id="ac-av">RK</div>
+        <div class="call-contact-name" id="ac-name">Ramesh Kumar</div>
+        <div class="call-contact-sub" id="ac-sub">Gold Loan Lead · 98765 43210</div>
+        <div class="call-timer" id="ac-timer">00:00</div>
+        <div id="ac-status" style="font-size:12px;color:rgba(255,255,255,.45);z-index:1">Connected</div>
+        <div class="call-controls">
+          <button class="call-btn mute" id="btn-mute" onclick="toggleMute()" title="Mute">🎤</button>
+          <button class="call-btn speaker" id="btn-speaker" onclick="toggleSpeaker()" title="Speaker">🔊</button>
+          <button class="call-btn keypad" onclick="toggleCallDialpad()" title="Keypad">⌨️</button>
+          <button class="call-btn hold" id="btn-hold" onclick="toggleHold()" title="Hold">⏸</button>
+          <button class="call-btn end" onclick="endCall()" title="End Call">📵</button>
+        </div>
+        <!-- In-call dialpad overlay -->
+        <div id="incall-dialpad" style="display:none;position:absolute;bottom:100px;background:rgba(13,27,62,.95);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:12px;z-index:10">
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px">
+            ${['1','2','3','4','5','6','7','8','9','*','0','#'].map(k=>`<div class="dp-key" style="background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.12)" onclick="showToast('Pressed '+\`${k}\`)"><div class="dp-key-num" style="color:#fff">${k}</div></div>`).join('')}
+          </div>
+        </div>
+      </div>
+
+      <!-- Call ended view -->
+      <div id="call-ended-view" style="display:none;flex-direction:column;overflow:hidden;flex:1">
+        <div class="call-log-header">
+          <div class="call-av" style="width:36px;height:36px;font-size:13px" id="ended-av">RK</div>
+          <div>
+            <div style="font-weight:500" id="ended-name">Ramesh Kumar</div>
+            <div style="font-size:11px;color:var(--text3)" id="ended-meta">Outbound · 3m 24s · Just now</div>
+          </div>
+          <button class="btn btn-primary btn-sm" style="margin-left:auto" onclick="startCall(lastCallName,lastCallAv,lastCallProduct)">📞 Call Again</button>
+        </div>
+        <div class="call-log-section" id="call-detail-log"></div>
+        <div class="call-note-form">
+          <div style="font-size:12px;font-weight:500;color:var(--text2);margin-bottom:4px">📝 Call Note</div>
+          <div style="display:flex;gap:8px;align-items:flex-start">
+            <select style="font-size:12px;padding:6px 8px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:inherit;outline:none">
+              <option>📞 Outbound — Connected</option>
+              <option>📞 Inbound — Connected</option>
+              <option>📵 No Answer</option>
+              <option>🔄 Callback Scheduled</option>
+            </select>
+            <textarea placeholder="Call summary, next action, customer intent..." rows="2" id="call-note-text" style="flex:1;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:7px 10px;font-size:13px;font-family:inherit;color:var(--text);outline:none;resize:none"></textarea>
+            <button class="btn btn-primary btn-sm" onclick="saveCallNote()">Save Note</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== CONVERSATIONS ==================== -->
+<div id="page-conversations" class="page" style="padding:0;margin:-20px -24px;overflow:hidden">
+  <div class="conv-layout">
+    <!-- Sidebar -->
+    <div class="conv-sidebar">
+      <div class="conv-sidebar-header">
+        <input type="text" class="conv-search" placeholder="Search conversations..." oninput="filterConvs(this.value)">
+      </div>
+      <div class="conv-filters">
+        <button class="conv-filter-btn active" onclick="filterConvsByChannel('all',this)">All</button>
+        <button class="conv-filter-btn" onclick="filterConvsByChannel('call',this)">📞 Call</button>
+        <button class="conv-filter-btn" onclick="filterConvsByChannel('whatsapp',this)">💬 WA</button>
+        <button class="conv-filter-btn" onclick="filterConvsByChannel('sms',this)">📱 SMS</button>
+        <button class="conv-filter-btn" onclick="filterConvsByChannel('email',this)">📧 Email</button>
+      </div>
+      <div class="conv-list" id="conv-list"></div>
+    </div>
+
+    <!-- Chat area -->
+    <div class="conv-chat-area">
+      <div class="conv-chat-header" id="conv-chat-header">
+        <div class="conv-av" id="conv-hdr-av">RK</div>
+        <div>
+          <div class="conv-chat-name" id="conv-hdr-name">Ramesh Kumar</div>
+          <div class="conv-chat-sub" id="conv-hdr-sub">Gold Loan Lead · 98765 43210 · Ganapathy Branch</div>
+        </div>
+        <div class="conv-chat-actions">
+          <button class="btn btn-outline btn-sm" onclick="nav('calling');setTimeout(()=>startCall('Ramesh Kumar','RK','Gold Loan'),100)">📞 Call</button>
+          <button class="btn btn-secondary btn-sm" onclick="showModal('new-lead')">👤 View Lead</button>
+          <button class="btn btn-primary btn-sm" onclick="showModal('send-template')">📋 Template</button>
+        </div>
+      </div>
+      <div class="conv-messages" id="conv-messages"></div>
+      <div class="conv-input-area">
+        <div class="conv-input-row">
+          <select class="conv-channel-sel" id="conv-channel-sel" onchange="updateConvChannel()">
+            <option value="whatsapp">💬 WhatsApp</option>
+            <option value="sms">📱 SMS</option>
+            <option value="email">📧 Email</option>
+            <option value="call">📞 Log Call</option>
+          </select>
+          <textarea class="conv-textarea" id="conv-input" placeholder="Type a message..." rows="1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendConvMsg()}" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="conv-send-btn" onclick="sendConvMsg()">➤</button>
+        </div>
+        <div class="conv-note-bar">
+          <span style="font-size:11px;color:var(--text3);font-weight:500">📌 Internal Note</span>
+          <input type="text" class="conv-note-inp" id="conv-note-inp" placeholder="Add private note for team (not sent to customer)..." onkeydown="if(event.key==='Enter')addConvNote()">
+          <button class="btn btn-outline btn-sm" onclick="addConvNote()">Add Note</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== WHATSAPP ==================== -->
+<div id="page-whatsapp" class="page">
+  <div class="wa-wrap">
+    <div class="wa-list">
+      <div class="wa-header">Conversations <span class="badge bgreen">5 unread</span></div>
+      <div id="wa-list-inner"></div>
+    </div>
+    <div class="wa-chat-area">
+      <div class="wa-chat-header">
+        <div class="dp-avatar" style="width:34px;height:34px;font-size:12px" id="wa-av">RK</div>
+        <div><div style="font-weight:500;font-size:13px" id="wa-name">Ramesh Kumar</div><div style="font-size:11px;color:var(--text3)">Gold Loan Lead · Last seen 2m ago</div></div>
+        <div style="margin-left:auto;display:flex;gap:6px">
+          <button class="btn btn-secondary btn-sm" onclick="showToast('📞 Calling...')">📞</button>
+          <button class="btn btn-secondary btn-sm" onclick="showModal('send-template')">📋 Template</button>
+        </div>
+      </div>
+      <div class="wa-chat" id="wa-chat"></div>
+      <div class="wa-footer">
+        <input type="text" class="wa-input" id="wa-input" placeholder="Type a message..." onkeydown="if(event.key==='Enter')sendWA()">
+        <button class="btn btn-secondary btn-sm" onclick="document.getElementById('wa-input').value='Dear {Name}, your EMI of ₹{Amount} is due. Pay via UPI: dhanam@ybl — Dhanam Finance 🙏'">📎</button>
+        <div class="wa-send-btn" onclick="sendWA()">➤</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SMS ==================== -->
+<div id="page-sms" class="page">
+  <div class="sg2">
+    <div class="card">
+      <div class="card-title">Send Bulk SMS</div>
+      <div class="fg"><label>Audience</label><select><option>All Active Borrowers (1,248)</option><option>DPD 1–30</option><option>Gold Loan Customers</option><option>NCD Investors</option><option>New Leads</option></select></div>
+      <div class="fg"><label>Template</label><select onchange="loadSMSTpl(this.value)"><option value="emi">EMI Due Reminder</option><option value="ncd">NCD Payout Alert</option><option value="offer">Gold Loan Offer</option><option value="kyc">KYC Renewal</option></select></div>
+      <div class="fg"><label>Message (English / Tamil)</label><textarea id="sms-msg" rows="4">Dear {Name}, your EMI of ₹{Amount} is due on {Date}. Pay to avoid late charges. Toll-free: 1800 2025 180 — Dhanam Finance</textarea></div>
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:12px;color:var(--text3)">Est. 1,248 recipients · 26 branches</span><button class="btn btn-primary" onclick="showToast('📲 SMS campaign queued for 1,248 recipients across 26 branches')">Send Campaign</button></div>
+    </div>
+    <div class="card">
+      <div class="card-title">SMS History</div>
+      <table><thead><tr><th>Campaign</th><th>Sent</th><th>Delivered</th><th>Date</th></tr></thead>
+      <tbody>
+        <tr><td>EMI Reminder Apr</td><td>1,248</td><td><span class="badge bgreen">98%</span></td><td>12 Apr</td></tr>
+        <tr><td>Gold Loan Offer</td><td>2,100</td><td><span class="badge bgreen">96%</span></td><td>8 Apr</td></tr>
+        <tr><td>NCD Maturity Alert</td><td>48</td><td><span class="badge bgreen">100%</span></td><td>5 Apr</td></tr>
+        <tr><td>KYC Renewal</td><td>310</td><td><span class="badge bamber">88%</span></td><td>1 Apr</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SUB-ACCOUNTS (BRANCHES) ==================== -->
+<div id="page-branches" class="page">
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-label">Total Branches</div><div class="stat-value">50+</div><div class="stat-meta">16 Districts</div></div>
+    <div class="stat-card"><div class="stat-label">Active</div><div class="stat-value" style="color:var(--green)">46</div></div>
+    <div class="stat-card"><div class="stat-label">Upcoming</div><div class="stat-value" style="color:var(--amber)">5</div></div>
+    <div class="stat-card"><div class="stat-label">Toll-Free</div><div class="stat-value" style="font-size:15px">1800 2025 180</div></div>
+  </div>
+  <div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap">
+    <button class="btn btn-primary btn-sm active" onclick="filterBranches('all',this)">All (50+)</button>
+    <button class="btn btn-outline btn-sm" onclick="filterBranches('Coimbatore',this)">Coimbatore</button>
+    <button class="btn btn-outline btn-sm" onclick="filterBranches('Salem',this)">Salem</button>
+    <button class="btn btn-outline btn-sm" onclick="filterBranches('Erode',this)">Erode</button>
+    <button class="btn btn-outline btn-sm" onclick="filterBranches('Tirunelveli',this)">Tirunelveli</button>
+    <button class="btn btn-outline btn-sm" onclick="filterBranches('upcoming',this)">📍 Upcoming</button>
+    <button class="btn btn-secondary btn-sm" style="margin-left:auto" onclick="showModal('new-branch')">+ Add Branch</button>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px" id="branches-grid"></div>
+</div>
+
+<!-- ==================== CALENDAR ==================== -->
+<div id="page-calendar" class="page">
+  <div class="sg2">
+    <div class="card">
+      <div class="card-title" style="justify-content:space-between">
+        <div style="display:flex;align-items:center;gap:8px">
+          <button class="btn btn-outline btn-sm">‹</button>
+          <span>April 2026</span>
+          <button class="btn btn-outline btn-sm">›</button>
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="showModal('new-event')">+ Event</button>
+      </div>
+      <div class="cal-grid" id="cal-grid"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Today — Apr 15</div>
+      <div id="cal-today-events"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== TASKS ==================== -->
+<div id="page-tasks" class="page">
+  <div style="display:flex;gap:8px;margin-bottom:16px">
+    <button class="btn btn-primary" onclick="showModal('new-task')">+ New Task</button>
+    <select style="font-size:13px;padding:5px 10px"><option>All Tasks</option><option>My Tasks</option><option>Team Tasks</option></select>
+  </div>
+  <div class="sg3">
+    <div class="card"><div class="card-title">To Do <span class="badge bred">4</span></div><div id="task-todo"></div></div>
+    <div class="card"><div class="card-title">In Progress <span class="badge bamber">3</span></div><div id="task-prog"></div></div>
+    <div class="card"><div class="card-title">Done <span class="badge bgreen">6</span></div><div id="task-done"></div></div>
+  </div>
+</div>
+
+<!-- ==================== REPORTS ==================== -->
+<div id="page-reports" class="page">
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-label">Disbursed (Apr)</div><div class="stat-value">₹8.2 Cr</div><div class="stat-meta up">↑ 12% vs Mar</div></div>
+    <div class="stat-card"><div class="stat-label">Net Interest Income</div><div class="stat-value">₹1.4 Cr</div><div class="stat-meta up">↑ 8%</div></div>
+    <div class="stat-card"><div class="stat-label">NNPA</div><div class="stat-value">1.3%</div><div class="stat-meta down">↑ 0.1%</div></div>
+    <div class="stat-card"><div class="stat-label">NCD Corpus</div><div class="stat-value">₹9.4 Cr</div><div class="stat-meta up">↑ 12%</div></div>
+  </div>
+  <div class="sg2">
+    <div class="card"><div class="card-title">Monthly Disbursements</div><div class="bar-chart" id="report-chart"></div></div>
+    <div class="card">
+      <div class="card-title">Product-wise Book Size</div>
+      <table><thead><tr><th>Product</th><th>Book Size</th><th>Accounts</th><th>GNPA%</th></tr></thead>
+      <tbody>
+        <tr><td>Gold Loans</td><td>₹17.1 Cr</td><td>624</td><td>0.8%</td></tr>
+        <tr><td>Mortgage/LAP</td><td>₹11.5 Cr</td><td>196</td><td>1.2%</td></tr>
+        <tr><td>SME Loans</td><td>₹6.4 Cr</td><td>428</td><td>2.4%</td></tr>
+        <tr><td>NCD Corpus</td><td>₹9.4 Cr</td><td>312</td><td>N/A</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SETTINGS ==================== -->
+<div id="page-settings" class="page">
+  <div class="sg2">
+    <div class="card">
+      <div class="card-title">Company Profile</div>
+      <div class="form-2">
+        <div class="fg"><label>Company Name</label><input value="Dhanam Investment &amp; Finance Pvt. Ltd."></div>
+        <div class="fg"><label>CoR No.</label><input value="N-07.00831"></div>
+        <div class="fg"><label>Category</label><input value="Non-Deposit Taking NBFC"></div>
+        <div class="fg"><label>Formerly</label><input value="Kiara Microcredit Private Limited"></div>
+        <div class="fg"><label>Nodal Officer</label><input value="Ms. Vijila"></div>
+        <div class="fg"><label>Nodal Email</label><input value="vijila@dhanam.finance"></div>
+        <div class="fg"><label>Toll-Free</label><input value="1800 2025 180"></div>
+        <div class="fg"><label>WhatsApp</label><input value="+91 73050 22272"></div>
+        <div class="fg"><label>Email</label><input value="contact@dhanam.finance"></div>
+        <div class="fg"><label>Registered Office</label><input value="Coimbatore, Tamil Nadu"></div>
+      </div>
+      <button class="btn btn-primary" style="margin-top:14px" onclick="showToast('✅ Settings saved')">Save Changes</button>
+    </div>
+    <div class="card">
+      <div class="card-title">Integrations</div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:10px;border:1px solid var(--border);border-radius:8px"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:18px">📲</span><div><div style="font-size:13px;font-weight:500">WappCloud — WhatsApp Business API</div><div style="font-size:11px;color:var(--text3)">Connected · 1800 2025 180</div></div></div><span class="badge bgreen">Active</span></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:10px;border:1px solid var(--border);border-radius:8px"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:18px">🏦</span><div><div style="font-size:13px;font-weight:500">Dhanam Prosper LMS</div><div style="font-size:11px;color:var(--text3)">LCode Technologies · UAT</div></div></div><span class="badge bamber">UAT</span></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:10px;border:1px solid var(--border);border-radius:8px"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:18px">📊</span><div><div style="font-size:13px;font-weight:500">TransUnion CIBIL API</div><div style="font-size:11px;color:var(--text3)">Bureau check · Active</div></div></div><span class="badge bgreen">Active</span></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:10px;border:1px solid var(--border);border-radius:8px"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:18px">🏛️</span><div><div style="font-size:13px;font-weight:500">NSDL / CDSL Demat Link</div><div style="font-size:11px;color:var(--text3)">NCD allotment · Active</div></div></div><span class="badge bgreen">Active</span></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:10px;border:1px solid var(--border);border-radius:8px"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:18px">🔗</span><div><div style="font-size:13px;font-weight:500">SACHET Portal / RBI CMS</div><div style="font-size:11px;color:var(--text3)">Grievance link enabled</div></div></div><span class="badge bteal">Linked</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div><!-- end #content -->
+</div><!-- end #main -->
+
+<!-- DETAIL PANEL -->
+<div id="detail-panel">
+  <div class="dp-header">
+    <div class="dp-avatar" id="dp-av">RK</div>
+    <div><div class="dp-name" id="dp-name">Ramesh Kumar</div><div class="dp-sub" id="dp-sub">Gold Loan Lead</div></div>
+    <button class="close-btn" style="margin-left:auto" onclick="closeDP()">×</button>
+  </div>
+  <div class="dp-section">
+    <div class="dp-section-title">Contact Info</div>
+    <div class="dp-row"><span class="dp-row-label">Mobile</span><span class="dp-row-val" id="dp-mobile">+91 98765 43210</span></div>
+    <div class="dp-row"><span class="dp-row-label">Branch</span><span class="dp-row-val" id="dp-branch">Ganapathy</span></div>
+    <div class="dp-row"><span class="dp-row-label">CIBIL</span><span id="dp-cibil"><span class="badge bgreen">732</span></span></div>
+    <div class="dp-row"><span class="dp-row-label">Product</span><span class="dp-row-val" id="dp-product">Gold Loan</span></div>
+    <div class="dp-row"><span class="dp-row-label">Amount</span><span class="dp-row-val" id="dp-amount">₹3,50,000</span></div>
+    <div class="dp-row"><span class="dp-row-label">Status</span><span id="dp-status"><span class="badge bamber">In Progress</span></span></div>
+  </div>
+  <div class="dp-section">
+    <div class="dp-section-title">Quick Actions</div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px">
+      <button class="btn btn-secondary btn-sm" onclick="showToast('📞 Calling...')">📞 Call</button>
+      <button class="btn btn-secondary btn-sm" onclick="nav('whatsapp')">💬 WhatsApp</button>
+      <button class="btn btn-secondary btn-sm" onclick="showModal('new-task')">✅ Task</button>
+      <button class="btn btn-primary btn-sm" onclick="showModal('new-lead')">✏️ Edit</button>
+    </div>
+  </div>
+  <!-- NOTES SECTION IN DETAIL PANEL -->
+  <div class="dp-section">
+    <div class="dp-section-title" style="display:flex;align-items:center;justify-content:space-between">Notes <span id="dp-note-count" style="font-weight:400;color:var(--text3);font-size:11px">3 notes</span></div>
+    <div class="notes-panel" id="dp-notes"></div>
+    <div class="note-add-box" style="margin-top:10px">
+      <select id="note-type-sel" style="font-size:12px;padding:4px 8px;width:auto;margin-bottom:8px">
+        <option value="call">📞 Call</option>
+        <option value="visit">🚗 Field Visit</option>
+        <option value="whatsapp">💬 WhatsApp</option>
+        <option value="doc">📄 Document</option>
+        <option value="credit">🔍 Credit Note</option>
+        <option value="general">📝 General</option>
+      </select>
+      <textarea id="note-input" rows="2" placeholder="Add a note about this lead..." style="font-size:13px"></textarea>
+      <div class="note-add-row">
+        <button class="btn btn-secondary btn-sm" style="flex:1" onclick="clearNote()">Clear</button>
+        <button class="btn btn-primary btn-sm" style="flex:2" onclick="addNote()">+ Add Note</button>
+      </div>
+    </div>
+  </div>
+  <div class="dp-section">
+    <div class="dp-section-title">Timeline</div>
+  </div>
+  <div style="padding:0 18px 14px">
+    <div class="tl-item"><div class="tl-dot tl-gold">💬</div><div><div class="tl-text">WhatsApp sent — Gold rate update & loan offer</div><div class="tl-time">Today, 10:45 AM</div></div></div>
+    <div class="tl-item"><div class="tl-dot tl-teal">📝</div><div><div class="tl-text">Aadhaar & photo received · Gold weighed: 52g gross</div><div class="tl-time">Yesterday, 3:20 PM</div></div></div>
+    <div class="tl-item"><div class="tl-dot tl-navy">📞</div><div><div class="tl-text">Inbound call — enquired about Gold Loan rates</div><div class="tl-time">12 Apr, 11:00 AM</div></div></div>
+    <div class="tl-item"><div class="tl-dot tl-gold">🌟</div><div><div class="tl-text">Lead created · Source: WhatsApp enquiry</div><div class="tl-time">10 Apr, 9:30 AM</div></div></div>
+  </div>
+</div>
+
+</div><!-- end #layout -->
+
+<!-- MODAL OVERLAY -->
+<div id="modal-overlay" onclick="closeModalOutside(event)">
+  <div class="modal" id="modal-inner">
+    <div class="modal-header">
+      <div class="modal-title" id="modal-title">New Lead</div>
+      <button class="close-btn" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+    <div class="modal-footer" id="modal-footer"></div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+/* ===== DATA ===== */
+const BRANCHES = [
+  {id:'hq',name:'Corporate HQ',district:'Coimbatore Urban',email:'headoffice@dhanam.finance',status:'active',type:'hq',leads:142,loans:320,aum:'₹18.2 Cr'},
+  {id:'ganapathy',name:'Ganapathy',district:'Coimbatore',email:'ganapathy@dhanam.finance',status:'active',type:'branch',leads:24,loans:84,aum:'₹3.1 Cr'},
+  {id:'gandhipuram',name:'Gandhipuram',district:'Coimbatore Urban',email:'gandhipuram@dhanam.finance',status:'active',type:'branch',leads:31,loans:96,aum:'₹3.8 Cr'},
+  {id:'irugur',name:'Irugur',district:'Coimbatore East',email:'irugur@dhanam.finance',status:'active',type:'branch',leads:18,loans:62,aum:'₹2.1 Cr'},
+  {id:'karanampettai',name:'Karanampettai',district:'Coimbatore East',email:'karanampettai@dhanam.finance',status:'active',type:'branch',leads:12,loans:48,aum:'₹1.6 Cr'},
+  {id:'kinathukadavu',name:'Kinathukadavu',district:'Coimbatore South',email:'kinathukadavu@dhanam.finance',status:'active',type:'branch',leads:9,loans:35,aum:'₹1.1 Cr'},
+  {id:'thondamuthur',name:'Thondamuthur',district:'Coimbatore South',email:'thondamuthur@dhanam.finance',status:'active',type:'branch',leads:11,loans:41,aum:'₹1.3 Cr'},
+  {id:'annur',name:'Annur',district:'Coimbatore North',email:'annur@dhanam.finance',status:'active',type:'branch',leads:8,loans:30,aum:'₹0.9 Cr'},
+  {id:'mallumichampatty',name:'Mallumichampatty',district:'Coimbatore',email:'mallumichampatty@dhanam.finance',status:'active',type:'branch',leads:7,loans:26,aum:'₹0.8 Cr'},
+  {id:'ooty',name:'Ooty',district:'Nilgiris',email:'ooty@dhanam.finance',status:'active',type:'branch',leads:14,loans:52,aum:'₹1.7 Cr'},
+  {id:'erode',name:'Erode',district:'Erode',email:'erode@dhanam.finance',status:'active',type:'branch',leads:22,loans:78,aum:'₹2.8 Cr'},
+  {id:'gobichettipalayam',name:'Gobichettipalayam',district:'Erode',email:'gobichettipalayam@dhanam.finance',status:'active',type:'branch',leads:10,loans:38,aum:'₹1.2 Cr'},
+  {id:'anthiyur',name:'Anthiyur',district:'Erode',email:'anthiyur@dhanam.finance',status:'active',type:'branch',leads:8,loans:28,aum:'₹0.9 Cr'},
+  {id:'nambiyur',name:'Nambiyur',district:'Erode',email:'nambiyur@dhanam.finance',status:'active',type:'branch',leads:6,loans:22,aum:'₹0.7 Cr'},
+  {id:'dharapuram',name:'Dharapuram',district:'Tiruppur',email:'dharapuram@dhanam.finance',status:'active',type:'branch',leads:13,loans:45,aum:'₹1.5 Cr'},
+  {id:'palladam',name:'Palladam',district:'Tiruppur',email:'palladam@dhanam.finance',status:'active',type:'branch',leads:9,loans:32,aum:'₹1.0 Cr'},
+  {id:'salem',name:'Salem City',district:'Salem',email:'salem@dhanam.finance',status:'active',type:'branch',leads:28,loans:95,aum:'₹3.5 Cr'},
+  {id:'athavathur',name:'Athavathur',district:'Salem',email:'athavathur@dhanam.finance',status:'active',type:'branch',leads:7,loans:24,aum:'₹0.8 Cr'},
+  {id:'kondalampatti',name:'Kondalampatti',district:'Salem',email:'kondalampatti@dhanam.finance',status:'active',type:'branch',leads:6,loans:21,aum:'₹0.7 Cr'},
+  {id:'sankari',name:'Sankari',district:'Salem',email:'sankari@dhanam.finance',status:'active',type:'branch',leads:8,loans:29,aum:'₹0.9 Cr'},
+  {id:'vazhapadi',name:'Vazhapadi',district:'Salem',email:'vazhapadi@dhanam.finance',status:'active',type:'branch',leads:5,loans:18,aum:'₹0.6 Cr'},
+  {id:'yercaud',name:'Yercaud',district:'Salem',email:'yercaud@dhanam.finance',status:'active',type:'branch',leads:7,loans:25,aum:'₹0.8 Cr'},
+  {id:'sevaipettai',name:'Sevaipettai',district:'Salem',email:'sevaipettai@dhanam.finance',status:'active',type:'branch',leads:5,loans:16,aum:'₹0.5 Cr'},
+  {id:'paramathivelur',name:'Paramathivelur',district:'Namakkal',email:'paramathivelur@dhanam.finance',status:'active',type:'branch',leads:9,loans:32,aum:'₹1.0 Cr'},
+  {id:'rasipuram',name:'Rasipuram',district:'Namakkal',email:'rasipuram@dhanam.finance',status:'active',type:'branch',leads:10,loans:36,aum:'₹1.1 Cr'},
+  {id:'tiruchengode',name:'Tiruchengode',district:'Namakkal',email:'tiruchengode@dhanam.finance',status:'active',type:'branch',leads:12,loans:42,aum:'₹1.4 Cr'},
+  {id:'kulithalai',name:'Kulithalai',district:'Karur',email:'kulithalai@dhanam.finance',status:'active',type:'branch',leads:8,loans:28,aum:'₹0.9 Cr'},
+  {id:'hosur',name:'Hosur',district:'Krishnagiri',email:'hosur@dhanam.finance',status:'active',type:'branch',leads:16,loans:58,aum:'₹2.0 Cr'},
+  {id:'bargur',name:'Bargur',district:'Krishnagiri',email:'bargur@dhanam.finance',status:'active',type:'branch',leads:7,loans:24,aum:'₹0.8 Cr'},
+  {id:'denkanikottai',name:'Denkanikottai',district:'Krishnagiri',email:'denkanikottai@dhanam.finance',status:'active',type:'branch',leads:6,loans:20,aum:'₹0.6 Cr'},
+  {id:'harur',name:'Harur',district:'Dharmapuri',email:'harur@dhanam.finance',status:'active',type:'branch',leads:8,loans:28,aum:'₹0.9 Cr'},
+  {id:'palacode',name:'Palacode',district:'Dharmapuri',email:'palacode@dhanam.finance',status:'active',type:'branch',leads:6,loans:21,aum:'₹0.7 Cr'},
+  {id:'nallampalli',name:'Nallampalli',district:'Dharmapuri',email:'nallampalli@dhanam.finance',status:'active',type:'branch',leads:5,loans:17,aum:'₹0.5 Cr'},
+  {id:'somarasampettai',name:'Somarasampettai',district:'Trichy',email:'somarasampettai@dhanam.finance',status:'active',type:'branch',leads:9,loans:33,aum:'₹1.0 Cr'},
+  {id:'kattuputhur',name:'Kattuputhur',district:'Trichy',email:'kattuputhur@dhanam.finance',status:'active',type:'branch',leads:7,loans:25,aum:'₹0.8 Cr'},
+  {id:'musiri',name:'Musiri',district:'Trichy',email:'musiri@dhanam.finance',status:'active',type:'branch',leads:8,loans:29,aum:'₹0.9 Cr'},
+  {id:'thirupuvanam',name:'Thirupuvanam',district:'Sivaganga',email:'thirupuvanam@dhanam.finance',status:'active',type:'branch',leads:6,loans:22,aum:'₹0.7 Cr'},
+  {id:'virudhachalam',name:'Virudhachalam',district:'Cuddalore',email:'virudhachalam@dhanam.finance',status:'active',type:'branch',leads:7,loans:26,aum:'₹0.8 Cr'},
+  {id:'chekkanoorani',name:'Chekkanoorani',district:'Madurai',email:'chekkanoorani@dhanam.finance',status:'active',type:'branch',leads:10,loans:36,aum:'₹1.2 Cr'},
+  {id:'rrnagar',name:'RR Nagar',district:'Madurai',email:'rrnagar@dhanam.finance',status:'active',type:'branch',leads:11,loans:40,aum:'₹1.3 Cr'},
+  {id:'dindigul',name:'Dindigul',district:'Dindigul',email:'dindigul@dhanam.finance',status:'active',type:'branch',leads:12,loans:44,aum:'₹1.4 Cr'},
+  {id:'kodaikanal',name:'Kodaikanal',district:'Dindigul',email:'kodaikanal@dhanam.finance',status:'active',type:'branch',leads:6,loans:20,aum:'₹0.6 Cr'},
+  {id:'palayamkottai',name:'Palayamkottai',district:'Tirunelveli',email:'palayamkottai@dhanam.finance',status:'active',type:'branch',leads:14,loans:50,aum:'₹1.7 Cr'},
+  {id:'ambasamudram',name:'Ambasamudram',district:'Tirunelveli',email:'ambasamudram@dhanam.finance',status:'active',type:'branch',leads:9,loans:32,aum:'₹1.0 Cr'},
+  {id:'alangulam',name:'Alangulam',district:'Tirunelveli',email:'alangulam@dhanam.finance',status:'active',type:'branch',leads:7,loans:25,aum:'₹0.8 Cr'},
+  {id:'sankarankovil',name:'Sankarankovil',district:'Tirunelveli',email:'sankarankovil@dhanam.finance',status:'active',type:'branch',leads:8,loans:28,aum:'₹0.9 Cr'},
+  {id:'surandai',name:'Surandai',district:'Tirunelveli',email:'surandai@dhanam.finance',status:'active',type:'branch',leads:6,loans:21,aum:'₹0.7 Cr'},
+  {id:'tenkasi',name:'Tenkasi',district:'Tenkasi',email:'tenkasi@dhanam.finance',status:'active',type:'branch',leads:9,loans:33,aum:'₹1.0 Cr'},
+  {id:'kariyapatti',name:'Kariyapatti',district:'Virudhunagar',email:'kariyapatti@dhanam.finance',status:'active',type:'branch',leads:6,loans:20,aum:'₹0.6 Cr'},
+  {id:'up1',name:'Chennai',district:'Chennai',email:'chennai@dhanam.finance',status:'upcoming',type:'branch',leads:0,loans:0,aum:'—'},
+  {id:'up2',name:'Madurai HQ',district:'Madurai',email:'madurai@dhanam.finance',status:'upcoming',type:'branch',leads:0,loans:0,aum:'—'},
+  {id:'up3',name:'Vellore',district:'Vellore',email:'vellore@dhanam.finance',status:'upcoming',type:'branch',leads:0,loans:0,aum:'—'},
+  {id:'up4',name:'Pudukkottai',district:'Pudukkottai',email:'pudukkottai@dhanam.finance',status:'upcoming',type:'branch',leads:0,loans:0,aum:'—'},
+  {id:'up5',name:'Nagercoil',district:'Kanyakumari',email:'nagercoil@dhanam.finance',status:'upcoming',type:'branch',leads:0,loans:0,aum:'—'},
+];
+
+const LEADS = [
+  {id:'L001',name:'Ramesh Kumar',mobile:'98765 43210',product:'Gold Loan',amount:'₹3.5L',source:'WhatsApp',branch:'Ganapathy',status:'Contacted',assigned:'Karthik R',date:'10 Apr',notes:[{type:'call',text:'Called — interested in gold loan, has 52g ornaments, needs ₹3.5L. Will visit branch tomorrow.',author:'Karthik R',time:'10 Apr 9:45 AM'},{type:'doc',text:'Documents received: Aadhaar, photo. Gold weighed 52g gross / 44g net.',author:'Karthik R',time:'11 Apr 3:00 PM'},{type:'whatsapp',text:'WhatsApp sent — gold rate update. Customer confirmed visit for 13 Apr.',author:'Auto',time:'12 Apr 10:00 AM'}]},
+  {id:'L002',name:'Meena Devi',mobile:'87654 32109',product:'Mortgage/LAP',amount:'₹18L',source:'Referral',branch:'Gandhipuram',status:'Qualified',assigned:'Preethi S',date:'11 Apr',notes:[{type:'credit',text:'CIBIL pulled — 712. Property at Saravanampatti. LTV feasible at 60%.',author:'Preethi S',time:'11 Apr 4:00 PM'}]},
+  {id:'L003',name:'Anbu Raj',mobile:'76543 21098',product:'SME Loan',amount:'₹12L',source:'Walk-in',branch:'Salem City',status:'New',assigned:'Murugan K',date:'12 Apr',notes:[]},
+  {id:'L004',name:'Selvam M',mobile:'65432 10987',product:'Gold Loan',amount:'₹4L',source:'WhatsApp',branch:'Erode',status:'New',assigned:'Murugan K',date:'13 Apr',notes:[{type:'general',text:'Enquiry via WhatsApp — 66g gold jewellery. Pricing expectations: ₹4L at 75% LTV.',author:'Auto',time:'13 Apr 11:00 AM'}]},
+  {id:'L005',name:'Kavitha P',mobile:'98123 45678',product:'Mortgage/LAP',amount:'₹35L',source:'Website',branch:'Hosur',status:'Contacted',assigned:'Deepa M',date:'13 Apr',notes:[]},
+  {id:'L006',name:'Rajan T',mobile:'90123 45678',product:'Gold Loan',amount:'₹2.5L',source:'Walk-in',branch:'Tiruchengode',status:'Qualified',assigned:'Preethi S',date:'14 Apr',notes:[]},
+  {id:'L007',name:'Sumathi K',mobile:'88912 34567',product:'Mortgage/LAP',amount:'₹45L',source:'Referral',branch:'Gandhipuram',status:'New',assigned:'Karthik R',date:'14 Apr',notes:[{type:'visit',text:'Field visit scheduled for 16 Apr — Saravanampatti commercial property. Expecting 2cr valuation.',author:'Karthik R',time:'14 Apr 5:00 PM'}]},
+  {id:'L008',name:'Babu S',mobile:'77891 23456',product:'SME Loan',amount:'₹12L',source:'WhatsApp',branch:'Erode',status:'Lost',assigned:'Murugan K',date:'9 Apr',notes:[{type:'call',text:'Customer opted for competitor. Offered lower rate. Mark as lost — follow up in 3 months.',author:'Murugan K',time:'12 Apr 2:00 PM'}]},
+];
+
+const WA_MSGS = {
+  'Ramesh Kumar':[{f:'in',t:'Vanakkam sir, Dhanam Finance la irundhu pesaren. Ungal gold loan request pathi pesalam?',tm:'10 Apr, 9:30 AM'},{f:'out',t:'Vanakkam! ₹3.5L thevaippattom. 52g gold jewellery irukku.',tm:'10 Apr, 9:45 AM'},{f:'in',t:'Sure sir. Gold rate today ₹6,200/g. At 75% LTV — ₹2,42,100 per 52g. Please visit branch with Aadhaar.',tm:'10 Apr, 9:50 AM'},{f:'out',t:'Ok, enna documents venum?',tm:'10 Apr, 10:00 AM'},{f:'in',t:'Just Aadhaar + passport photo sir. Disbursal same day! 💛',tm:'10 Apr, 10:02 AM'}],
+  'Meena Devi':[{f:'in',t:'Madam, your Mortgage LAP application ₹18L received. CIBIL check initiated.',tm:'11 Apr, 11:00 AM'},{f:'out',t:'Thank you. When will it be sanctioned?',tm:'11 Apr, 11:30 AM'},{f:'in',t:'2-7 working days madam. Field visit will be arranged. Our team will call you.',tm:'11 Apr, 11:32 AM'}],
+  'Sumathi K':[{f:'in',t:'Hi Sumathi madam, regarding your ₹45L Mortgage LAP enquiry — we need property docs and latest bank statement.',tm:'14 Apr, 5:15 PM'}],
+};
+let activeWA = 'Ramesh Kumar';
+
+const NOTES_DEFAULT = {
+  call:{icon:'📞',color:'var(--green-light)',textColor:'var(--green)',label:'Call'},
+  visit:{icon:'🚗',color:'var(--amber-light)',textColor:'var(--amber)',label:'Field Visit'},
+  whatsapp:{icon:'💬',color:'var(--teal-light)',textColor:'var(--teal)',label:'WhatsApp'},
+  doc:{icon:'📄',color:'rgba(13,27,62,.08)',textColor:'var(--navy-mid)',label:'Document'},
+  credit:{icon:'🔍',color:'var(--red-light)',textColor:'var(--red)',label:'Credit Note'},
+  general:{icon:'📝',color:' var(--surface2)',textColor:'var(--text3)',label:'Note'},
+};
+
+const GOLD_DATA = [
+  {cust:'Meena Devi',branch:'Gandhipuram',ornaments:'Necklace, Bangles',gw:'28g',nw:'24g',rate:'₹6,200/g',amt:'₹1,12,000',ltv:'75%',tenure:'12m',ir:'9%',status:'Active'},
+  {cust:'Lakshmi V',branch:'Kinathukadavu',ornaments:'Rings (3)',gw:'12g',nw:'10g',rate:'₹6,200/g',amt:'₹46,500',ltv:'75%',tenure:'6m',ir:'9%',status:'Active'},
+  {cust:'Rajan T',branch:'Tiruchengode',ornaments:'Chain, Earrings',gw:'35g',nw:'30g',rate:'₹6,200/g',amt:'₹1,39,500',ltv:'75%',tenure:'12m',ir:'9.5%',status:'Active'},
+  {cust:'Valli K',branch:'Ganapathy',ornaments:'Necklace',gw:'50g',nw:'43g',rate:'₹6,200/g',amt:'₹2,00,000',ltv:'75%',tenure:'12m',ir:'9%',status:'DPD-7'},
+  {cust:'Selvam M',branch:'Erode',ornaments:'Bangles (4)',gw:'66g',nw:'55g',rate:'₹6,200/g',amt:'₹2,56,500',ltv:'75%',tenure:'12m',ir:'9%',status:'Active'},
+];
+
+const MORTGAGE_DATA = [
+  {id:'MP2026014',cust:'Meena Devi',branch:'Gandhipuram',ptype:'Residential',amt:'₹18,00,000',tenure:'120m',emi:'₹24,600',stage:'Legal Verification',cibil:'712',status:'Under Review'},
+  {id:'MP2026015',cust:'Sumathi K',branch:'Gandhipuram',ptype:'Commercial',amt:'₹45,00,000',tenure:'180m',emi:'₹51,200',stage:'Enquiry',cibil:'748',status:'New'},
+  {id:'MP2026008',cust:'Priya Textiles',branch:'Ganapathy',ptype:'Commercial',amt:'₹1,20,00,000',tenure:'180m',emi:'₹1,37,000',stage:'Disbursed',cibil:'768',status:'Disbursed'},
+  {id:'MP2026011',cust:'Anbu Raj',branch:'Salem City',ptype:'Residential',amt:'₹32,00,000',tenure:'120m',emi:'₹43,700',stage:'MODT Registration',cibil:'751',status:'Approved'},
+];
+
+const SME_DATA = [
+  {id:'SL2026021',biz:'Ramesh Traders',branch:'Ganapathy',amt:'₹15,00,000',purpose:'Working Capital',coll:'Property',emi:'₹32,450',cibil:'732',dpd:'0',status:'Active'},
+  {id:'SL2026022',biz:'Selvam Enterprises',branch:'Erode',amt:'₹9,80,000',purpose:'Machinery',coll:'Gold',emi:'₹18,450',cibil:'645',dpd:'3',status:'DPD-3'},
+  {id:'SL2026015',biz:'Kumar Textiles',branch:'Tiruchengode',amt:'₹22,00,000',purpose:'Supply Chain',coll:'Property',emi:'₹47,600',cibil:'701',dpd:'14',status:'DPD-14'},
+];
+
+const EMI_DATA = [
+  {id:'SL2026022',cust:'Selvam Enterprises',branch:'Erode',prod:'SME Loan',emi:'₹18,450',due:'12 Apr',dpd:'3',out:'₹18,450'},
+  {id:'GL2024184',cust:'Valli K',branch:'Ganapathy',prod:'Gold Loan',emi:'₹4,200',due:'8 Apr',dpd:'7',out:'₹4,200'},
+  {id:'SL2026015',cust:'Kumar Textiles',branch:'Tiruchengode',prod:'SME Loan',emi:'₹55,200',due:'1 Apr',dpd:'14',out:'₹1,10,400'},
+  {id:'MP2025044',cust:'Raj Hardware',branch:'Salem City',prod:'Mortgage',emi:'₹22,100',due:'28 Mar',dpd:'18',out:'₹66,300'},
+];
+
+const INVESTORS = [
+  {name:'V. Krishnamurthy',mobile:'90876 54321',scheme:'Doubling',amt:'₹5,00,000',tenure:'60M',rate:'20%',start:'Mar 2024',maturity:'Mar 2029',status:'Active'},
+  {name:'Priya Textiles (Corp)',mobile:'87654 32100',scheme:'Cumulative 36M',amt:'₹10,00,000',tenure:'36M',rate:'13.50%',start:'Jan 2024',maturity:'Jan 2027',status:'Active'},
+  {name:'Lakshmi Devi (Sr.Cit)',mobile:'99012 34567',scheme:'Monthly 36M',amt:'₹2,00,000',tenure:'36M',rate:'12.50%',start:'Feb 2024',maturity:'Feb 2027',status:'Active'},
+  {name:'S. Ramamurthy',mobile:'98765 12345',scheme:'Annual 24M',amt:'₹3,00,000',tenure:'24M',rate:'12.50%',start:'Apr 2024',maturity:'Apr 2026',status:'Maturity Due'},
+];
+
+const TASKS = {
+  todo:[{t:'Call Rajan T — Gold Loan follow-up',p:'high',d:'Today'},{t:'Collect property docs from Sumathi K',p:'high',d:'Today'},{t:'CIBIL check for Meena Devi LAP',p:'medium',d:'16 Apr'},{t:'Prepare sanction — Priya Textiles',p:'medium',d:'16 Apr'}],
+  prog:[{t:'Field visit — Kumar Textiles (DPD-14)',p:'high',d:'Today'},{t:'Legal verification — Anbu Raj property',p:'medium',d:'16 Apr'},{t:'NCD investor onboarding — Ramamurthy',p:'low',d:'Today'}],
+  done:[{t:'Disburse Gold Loan — Ramesh Kumar',p:'high',d:'14 Apr'},{t:'NCD payout — Monthly scheme x8',p:'medium',d:'14 Apr'},{t:'Weekly collection report submitted',p:'low',d:'14 Apr'},{t:'New branch activated — Hosur',p:'medium',d:'13 Apr'},{t:'Gold rate updated across all branches',p:'medium',d:'13 Apr'},{t:'WhatsApp broadcast — 1,248 borrowers',p:'medium',d:'12 Apr'}],
+};
+
+const CAL_EVENTS = {15:['Lead review meeting — 10 AM','Field visit — Sumathi K property'],16:['NCD investor meeting — 3 PM','EMI collection drive'],20:['Monthly review — 2 PM'],22:['Gold Loan Mela — Erode'],25:['Team training session'],30:['NCD payout date — Monthly scheme']};
+
+const PIPELINE_STAGES = [
+  {l:'Enquiry',c:'#1A2F5E',bg:'rgba(26,47,94,.08)',deals:[{n:'Anbu Raj',p:'SME Loan',a:'₹12L',age:'3d'},{n:'Selvam M',p:'Gold Loan',a:'₹4L',age:'2d'}]},
+  {l:'Document Collection',c:'#C8992A',bg:'rgba(200,153,42,.1)',deals:[{n:'Ramesh Kumar',p:'Gold Loan',a:'₹3.5L',age:'5d'},{n:'Kavitha P',p:'Mortgage',a:'₹35L',age:'2d'}]},
+  {l:'Credit Appraisal',c:'#1D7A6E',bg:'rgba(29,122,110,.1)',deals:[{n:'Meena Devi',p:'LAP',a:'₹18L',age:'7d'},{n:'Rajan T',p:'Gold Loan',a:'₹2.5L',age:'4d'}]},
+  {l:'Sanction',c:'#8B6A1A',bg:'rgba(139,106,26,.1)',deals:[{n:'Sumathi K',p:'LAP',a:'₹45L',age:'10d'}]},
+  {l:'Disbursement',c:'#1A7A4A',bg:'rgba(26,122,74,.1)',deals:[{n:'Suresh Kumar',p:'SME Loan',a:'₹22L',age:'1d'}]},
+];
+
+/* ===== NOTES STATE ===== */
+let activeLeadIdx = 0;
+function openDP(idx) {
+  activeLeadIdx = idx;
+  const l = LEADS[idx];
+  const init = l.name.split(' ').map(w=>w[0]).join('');
+  document.getElementById('dp-av').textContent = init;
+  document.getElementById('dp-name').textContent = l.name;
+  document.getElementById('dp-sub').textContent = l.product + ' Lead · ' + l.branch;
+  document.getElementById('dp-mobile').textContent = '+91 ' + l.mobile;
+  document.getElementById('dp-branch').textContent = l.branch;
+  document.getElementById('dp-product').textContent = l.product;
+  document.getElementById('dp-amount').textContent = l.amount;
+  renderNotes(l.notes);
+  document.getElementById('detail-panel').classList.add('open');
+}
+
+function renderNotes(notes) {
+  const el = document.getElementById('dp-notes');
+  document.getElementById('dp-note-count').textContent = notes.length + ' note' + (notes.length!==1?'s':'');
+  if (!notes.length) { el.innerHTML = '<div style="font-size:12px;color:var(--text3);text-align:center;padding:12px 0">No notes yet. Add the first note below.</div>'; return; }
+  el.innerHTML = notes.map((n,i) => {
+    const cfg = NOTES_DEFAULT[n.type] || NOTES_DEFAULT.general;
+    return `<div class="note-item">
+      <div class="note-item-header">
+        <div class="note-author">
+          <div class="note-avatar">${n.author==='Auto'?'⚡':n.author.split(' ').map(w=>w[0]).join('')}</div>
+          <div>
+            <div class="note-name">${n.author}</div>
+            <div class="note-time">${n.time}</div>
+          </div>
+        </div>
+        <span class="note-type-tag" style="background:${cfg.color};color:${cfg.textColor}">${cfg.icon} ${cfg.label}</span>
+      </div>
+      <div class="note-text">${n.text}</div>
+    </div>`;
+  }).join('');
+}
+
+function addNote() {
+  const text = document.getElementById('note-input').value.trim();
+  if (!text) { showToast('⚠️ Please type a note first'); return; }
+  const type = document.getElementById('note-type-sel').value;
+  const now = new Date();
+  const timeStr = now.getDate() + ' Apr, ' + now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
+  LEADS[activeLeadIdx].notes.unshift({type, text, author:'Hema (You)', time:'Today, ' + timeStr.split(', ')[1]});
+  renderNotes(LEADS[activeLeadIdx].notes);
+  document.getElementById('note-input').value = '';
+  showToast('📝 Note added successfully');
+}
+
+function clearNote() { document.getElementById('note-input').value = ''; }
+function closeDP() { document.getElementById('detail-panel').classList.remove('open'); }
+
+/* ===== NAV ===== */
+function nav(page) {
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const el = document.getElementById('page-'+page);
+  if(el) el.classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  const TITLES = {dashboard:'Dashboard','loan-products':'Loan Products',gold:'Gold Loans',mortgage:'Mortgage / LAP',sme:'SME Loans',emi:'EMI Tracker',collections:'Collections',leads:'Leads',contacts:'Contacts',pipeline:'Pipeline',investments:'NCD Investments',investors:'Investor Registry',calling:'Calling',conversations:'Conversations',whatsapp:'WhatsApp',sms:'SMS Campaigns',branches:'Sub-Accounts — All Branches',calendar:'Calendar',tasks:'Tasks',reports:'Reports',settings:'Settings'};
+  const SUBS = {dashboard:'Overview · CoR No: N-07.00831 · 1800 2025 180','loan-products':'Gold Loan · Mortgage/LAP · SME Loan',gold:'Gold pledging & instant disbursal',mortgage:'Loan against property — up to ₹5 Cr · 15 years',sme:'Supply chain & working capital finance',investments:'Secured NCDs · Up to 20% yield · Demat allotted',investors:'NCD investor registry & payouts',branches:'All 50+ branch sub-accounts across South India',leads:'Lead management with notes & timeline',calling:'Click-to-call · Call log · Notes · Dial pad',conversations:'Unified inbox — WhatsApp · Call · SMS · Email'};
+  document.getElementById('page-title').textContent = TITLES[page]||page;
+  document.getElementById('page-subtitle').textContent = SUBS[page]||'Dhanam Investment & Finance Pvt. Ltd.';
+  const ACTS = {
+    leads:`<button class="btn btn-secondary btn-sm" onclick="showModal('quick-add')">Import</button><button class="btn btn-primary btn-sm" onclick="showModal('new-lead')">+ New Lead</button>`,
+    gold:`<button class="btn btn-primary btn-sm" onclick="showModal('new-gold')">+ New Gold Loan</button>`,
+    mortgage:`<button class="btn btn-primary btn-sm" onclick="showModal('new-mortgage')">+ New Mortgage</button>`,
+    investments:`<button class="btn btn-primary btn-sm" onclick="showModal('new-investment')">+ New Investment</button>`,
+    investors:`<button class="btn btn-primary btn-sm" onclick="showModal('new-investment')">+ New Investment</button>`,
+    branches:`<button class="btn btn-secondary btn-sm" onclick="showModal('new-branch')">+ Add Branch</button>`,
+    dashboard:`<button class="btn btn-secondary btn-sm" onclick="showModal('quick-add')">+ Quick Add</button><button class="btn btn-primary btn-sm" onclick="showModal('new-lead')">+ New Lead</button>`,
+    calling:`<button class="btn btn-outline btn-sm" onclick="showDialPad()">⌨️ Dial Pad</button><button class="btn btn-primary btn-sm" onclick="startCall('New Call','NC','General')">📞 New Call</button>`,
+    conversations:`<button class="btn btn-secondary btn-sm" onclick="showModal('new-lead')">+ New Lead</button><button class="btn btn-primary btn-sm" onclick="showToast('💬 Starting new conversation...')">+ New Conversation</button>`,
+  };
+  document.getElementById('page-actions').innerHTML = ACTS[page]||'';
+  if(page==='calling'){renderCallList();showDialPad();}
+  if(page==='conversations'){renderConvList();}
+  if(page==='leads') renderLeads();
+  if(page==='contacts') renderContacts();
+  if(page==='pipeline') renderPipeline();
+  if(page==='gold') renderGold();
+  if(page==='mortgage') renderMortgage();
+  if(page==='sme') renderSME();
+  if(page==='emi') renderEMI();
+  if(page==='investors') renderInvestors();
+  if(page==='whatsapp'){renderWAList();renderWAChat(activeWA);}
+  if(page==='branches') renderBranches('all');
+  if(page==='calendar'){renderCal();renderCalEvents();}
+  if(page==='tasks') renderTasks();
+  if(page==='reports') setTimeout(()=>{renderBarChart('report-chart',['Nov','Dec','Jan','Feb','Mar','Apr'],[5.8,6.2,7.1,6.8,7.6,8.2],'var(--navy-light)')},50);
+}
+
+/* ===== RENDERS ===== */
+function sb(s){const m={Active:'bgreen',New:'bn',Contacted:'bteal',Qualified:'bg',Lost:'bred','DPD-3':'bamber','DPD-7':'bred','DPD-14':'bred','DPD-18':'bred','Under Review':'bamber',Approved:'bgreen',Disbursed:'bteal',Rejected:'bred','Maturity Due':'bamber',upcoming:'bamber',active:'bgreen'};return`<span class="badge ${m[s]||'bgray'}">${s}</span>`;}
+
+function renderLeads(){
+  const branchSel = document.getElementById('leads-branch-filter');
+  if(branchSel && branchSel.options.length<=1){BRANCHES.filter(b=>b.status==='active').forEach(b=>{const o=document.createElement('option');o.value=b.id;o.textContent=b.name;branchSel.appendChild(o);});}
+  const tbody=document.getElementById('leads-tbody');
+  if(!tbody) return;
+  tbody.innerHTML=LEADS.map((l,i)=>`<tr style="cursor:pointer" onclick="openDP(${i})">
+    <td><input type="checkbox" onclick="event.stopPropagation()"></td>
+    <td><strong>${l.name}</strong><br><span style="font-size:11px;color:var(--text3)">${l.id}</span></td>
+    <td>${l.mobile}</td><td>${l.product}</td>
+    <td style="font-weight:500">${l.amount}</td>
+    <td><span class="badge bn">${l.source}</span></td>
+    <td><span style="font-size:12px;color:var(--text2)">${l.branch}</span></td>
+    <td>${sb(l.status)}</td><td>${l.assigned}</td>
+    <td style="color:var(--text3)">${l.date}</td>
+    <td><span class="badge bgray" style="cursor:pointer" onclick="event.stopPropagation();openDP(${i})">${l.notes.length} note${l.notes.length!==1?'s':''}</span></td>
+    <td style="display:flex;gap:4px">
+      <button class="btn btn-secondary btn-sm" onclick="event.stopPropagation();nav('whatsapp')">💬</button>
+      <button class="btn btn-secondary btn-sm" onclick="event.stopPropagation();nav('calling');setTimeout(()=>startCall('${l.name}','${l.name.split(' ').map(w=>w[0]).join('')}','${l.product}'),100)">📞</button>
+    </td>
+  </tr>`).join('');
+}
+
+function renderContacts(){
+  const tbody=document.getElementById('contacts-tbody');
+  if(!tbody) return;
+  const data=[{n:'Ramesh Kumar',m:'98765 43210',c:'Coimbatore',br:'Ganapathy',l:'Gold Loan',o:'₹3.5L',cs:'732',s:'Active'},{n:'Priya Textiles',m:'87654 32100',c:'Tirupur',br:'Ganapathy',l:'LAP',o:'₹1.2Cr',cs:'768',s:'Active'},{n:'Selvam Enterprises',m:'76543 21001',c:'Erode',br:'Erode',l:'SME Loan',o:'₹9.8L',cs:'645',s:'DPD-3'},{n:'Meena Devi',m:'65432 10902',c:'Coimbatore',br:'Gandhipuram',l:'Gold Loan',o:'₹3.1L',cs:'N/A',s:'Active'},{n:'Anbu Raj',m:'98123 45603',c:'Salem',br:'Salem City',l:'SME Loan',o:'₹15L',cs:'751',s:'Active'}];
+  tbody.innerHTML=data.map(c=>`<tr style="cursor:pointer" onclick="showToast('👤 Opening ${c.n} profile...')"><td><strong>${c.n}</strong></td><td>${c.m}</td><td>${c.c}</td><td><span style="font-size:12px">${c.br}</span></td><td>${c.l}</td><td style="font-weight:500">${c.o}</td><td>${c.cs!=='N/A'?`<span class="badge ${parseInt(c.cs)>=700?'bgreen':'bamber'}">${c.cs}</span>`:'<span class="badge bgray">N/A</span>'}</td><td>${sb(c.s)}</td><td><button class="btn btn-secondary btn-sm" onclick="event.stopPropagation();nav('whatsapp')">💬</button></td></tr>`).join('');
+}
+
+function renderPipeline(){
+  const b=document.getElementById('pipeline-board');
+  if(!b) return;
+  b.innerHTML=PIPELINE_STAGES.map(s=>`<div class="pipeline-col"><div class="pipeline-header" style="background:${s.bg};color:${s.c};border:1px solid ${s.c}20"><span>${s.l}</span><span style="font-size:10px;opacity:.7">${s.deals.length}</span></div><div class="pipeline-cards">${s.deals.map(d=>`<div class="pipeline-card" onclick="showToast('📋 ${d.n} — ${d.p} ${d.a}')"><div class="pc-name">${d.n}</div><div class="pc-meta"><span>${d.p}</span><span>${d.age} ago</span></div><div class="pc-amount">${d.a}</div></div>`).join('')}<button class="btn btn-outline btn-sm" style="width:100%;margin-top:4px" onclick="showModal('new-lead')">+ Add</button></div></div>`).join('');
+}
+
+function renderGold(){
+  const tbody=document.getElementById('gold-tbody');
+  if(!tbody) return;
+  tbody.innerHTML=GOLD_DATA.map(g=>`<tr><td><strong>${g.cust}</strong></td><td>${g.branch}</td><td>${g.ornaments}</td><td>${g.gw}</td><td>${g.nw}</td><td>${g.rate}</td><td style="font-weight:500">${g.amt}</td><td>${g.ltv}</td><td>${g.tenure}</td><td>${g.ir}</td><td>${sb(g.status)}</td><td><button class="btn btn-secondary btn-sm" onclick="showToast('📄 Opening file...')">View</button></td></tr>`).join('');
+}
+
+function renderMortgage(){
+  const tbody=document.getElementById('mortgage-tbody');
+  if(!tbody) return;
+  tbody.innerHTML=MORTGAGE_DATA.map(m=>`<tr><td><span class="badge bn">${m.id}</span></td><td><strong>${m.cust}</strong></td><td>${m.branch}</td><td>${m.ptype}</td><td style="font-weight:500">${m.amt}</td><td>${m.tenure}</td><td>${m.emi}</td><td>${m.stage}</td><td><span class="badge ${parseInt(m.cibil)>=700?'bgreen':'bamber'}">${m.cibil}</span></td><td>${sb(m.status)}</td><td>${m.status==='Approved'?`<button class="btn btn-success btn-sm" onclick="showToast('💰 Processing disbursal...')">Disburse</button>`:`<button class="btn btn-secondary btn-sm" onclick="showToast('📄 Opening file...')">View</button>`}</td></tr>`).join('');
+}
+
+function renderSME(){
+  const tbody=document.getElementById('sme-tbody');
+  if(!tbody) return;
+  tbody.innerHTML=SME_DATA.map(s=>`<tr><td><span class="badge bn">${s.id}</span></td><td><strong>${s.biz}</strong></td><td>${s.branch}</td><td style="font-weight:500">${s.amt}</td><td>${s.purpose}</td><td>${s.coll}</td><td>${s.emi}</td><td><span class="badge ${parseInt(s.cibil)>=700?'bgreen':'bamber'}">${s.cibil}</span></td><td>${s.dpd==='0'?'<span class="badge bgreen">0</span>':sb('DPD-'+s.dpd)}</td><td>${sb(s.status)}</td><td><button class="btn btn-secondary btn-sm" onclick="showToast('📄 Opening file...')">View</button></td></tr>`).join('');
+}
+
+function renderEMI(){
+  const tbody=document.getElementById('emi-tbody');
+  if(!tbody) return;
+  tbody.innerHTML=EMI_DATA.map(e=>`<tr><td><span class="badge bn">${e.id}</span></td><td><strong>${e.cust}</strong></td><td>${e.branch}</td><td>${e.prod}</td><td style="font-weight:500">${e.emi}</td><td style="color:var(--red)">${e.due}</td><td>${sb('DPD-'+e.dpd)}</td><td style="font-weight:500;color:var(--red)">${e.out}</td><td style="display:flex;gap:4px"><button class="btn btn-secondary btn-sm" onclick="showToast('💬 WhatsApp reminder sent to ${e.cust}')">💬</button><button class="btn btn-primary btn-sm" onclick="showToast('💰 Recording payment...')">Pay</button></td></tr>`).join('');
+}
+
+function renderInvestors(){
+  const tbody=document.getElementById('investors-tbody');
+  if(!tbody) return;
+  tbody.innerHTML=INVESTORS.map(inv=>`<tr><td><strong>${inv.name}</strong></td><td>${inv.mobile}</td><td><span class="badge bg">${inv.scheme}</span></td><td style="font-weight:500">${inv.amt}</td><td>${inv.tenure}</td><td style="font-weight:500;color:var(--green)">${inv.rate}</td><td>${inv.start}</td><td>${inv.maturity}</td><td>${sb(inv.status)}</td><td><button class="btn btn-secondary btn-sm" onclick="showToast('📋 Opening NCD certificate...')">View</button></td></tr>`).join('');
+}
+
+function renderWAList(){
+  const el=document.getElementById('wa-list-inner');
+  if(!el) return;
+  el.innerHTML=Object.keys(WA_MSGS).map(name=>{
+    const init=name.split(' ').map(w=>w[0]).join('');
+    const last=WA_MSGS[name][WA_MSGS[name].length-1];
+    return `<div class="wa-contact ${activeWA===name?'active':''}" onclick="selectWA('${name}')"><div style="width:36px;height:36px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--gold);font-weight:600;flex-shrink:0">${init}</div><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:500">${name}</div><div style="font-size:11px;color:var(--text3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${last.t.substring(0,38)}...</div></div></div>`;
+  }).join('');
+}
+
+function renderWAChat(name){
+  const el=document.getElementById('wa-chat');
+  if(!el) return;
+  el.innerHTML=(WA_MSGS[name]||[]).map(m=>`<div class="wm ${m.f==='out'?'wm-out':'wm-in'}">${m.t}<div class="wm-time">${m.tm}</div></div>`).join('');
+  el.scrollTop=el.scrollHeight;
+}
+
+function selectWA(name){activeWA=name;document.getElementById('wa-name').textContent=name;document.getElementById('wa-av').textContent=name.split(' ').map(w=>w[0]).join('');renderWAList();renderWAChat(name);}
+function sendWA(){const inp=document.getElementById('wa-input');const t=inp.value.trim();if(!t) return;if(!WA_MSGS[activeWA])WA_MSGS[activeWA]=[];WA_MSGS[activeWA].push({f:'in',t,tm:'Now'});renderWAChat(activeWA);inp.value='';showToast('✅ Message sent');}
+
+function renderBranches(filter){
+  const grid=document.getElementById('branches-grid');
+  if(!grid) return;
+  let data=filter==='all'?BRANCHES:filter==='upcoming'?BRANCHES.filter(b=>b.status==='upcoming'):BRANCHES.filter(b=>b.district.toLowerCase().includes(filter.toLowerCase()));
+  grid.innerHTML=data.map(b=>`<div class="branch-card ${b.type==='hq'?'hq':''} ${b.status==='upcoming'?'upcoming':''}" onclick="switchBranch('${b.id}');showToast('🏢 Switched to ${b.name} branch')">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px">
+      <div><div class="bc-name">${b.name} ${b.type==='hq'?'★':''}</div><div class="bc-dist">${b.district}</div></div>
+      ${sb(b.status)}
+    </div>
+    <div style="font-size:11px;color:var(--text3);margin-bottom:8px">${b.email}</div>
+    ${b.status!=='upcoming'?`<div class="bc-stats"><div class="bc-stat"><strong>${b.leads}</strong>Leads</div><div class="bc-stat"><strong>${b.loans}</strong>Loans</div><div class="bc-stat"><strong>${b.aum}</strong>AUM</div></div>`:'<div style="font-size:11px;color:var(--amber)">📍 Opening Soon</div>'}
+  </div>`).join('');
+}
+
+function filterBranches(f,btn){document.querySelectorAll('#page-branches .btn').forEach(b=>{b.classList.remove('btn-primary');b.classList.add('btn-outline')});btn.classList.add('btn-primary');btn.classList.remove('btn-outline');renderBranches(f);}
+
+function renderCal(){
+  const grid=document.getElementById('cal-grid');if(!grid) return;
+  ['Su','Mo','Tu','We','Th','Fr','Sa'].forEach(h=>{const d=document.createElement('div');d.className='cal-hdr';d.textContent=h;grid.appendChild(d);});
+  const first=new Date(2026,3,1).getDay();
+  for(let i=0;i<first;i++){const d=document.createElement('div');d.className='cal-day other';d.textContent=31-first+i+1;grid.appendChild(d);}
+  for(let day=1;day<=30;day++){const d=document.createElement('div');d.className='cal-day'+(day===15?' today':'')+(CAL_EVENTS[day]?' has-event':'');d.textContent=day;d.onclick=()=>{if(CAL_EVENTS[day])showToast('📅 '+CAL_EVENTS[day][0]);};grid.appendChild(d);}
+}
+
+function renderCalEvents(){
+  const el=document.getElementById('cal-today-events');if(!el) return;
+  const evs=CAL_EVENTS[15]||[];
+  el.innerHTML=evs.map((ev,i)=>`<div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)"><div style="width:4px;height:40px;border-radius:2px;background:${i===0?'var(--gold)':'var(--teal)'}"></div><div><div style="font-size:13px;font-weight:500">${ev}</div><div style="font-size:11px;color:var(--text3)">April 15, 2026</div></div></div>`).join('')+`<button class="btn btn-primary btn-sm" style="margin-top:12px;width:100%" onclick="showModal('new-event')">+ Schedule Event</button>`;
+}
+
+function renderTasks(){
+  ['todo','prog','done'].forEach(col=>{
+    const el=document.getElementById('task-'+col);if(!el) return;
+    const data=TASKS[col==='todo'?'todo':col==='prog'?'prog':'done'];
+    el.innerHTML=data.map(t=>`<div style="border:1px solid var(--border);border-radius:8px;padding:10px 12px;margin-bottom:8px;cursor:pointer" onclick="showToast('📋 ${t.t.substring(0,40)}...')"><div style="font-size:13px;margin-bottom:4px">${t.t}</div><div style="display:flex;justify-content:space-between;align-items:center"><span class="badge ${t.p==='high'?'bred':t.p==='medium'?'bamber':'bgray'}">${t.p}</span><span style="font-size:11px;color:var(--text3)">${t.d}</span></div></div>`).join('');
+  });
+}
+
+function renderBarChart(id,labels,vals,color){
+  const el=document.getElementById(id);if(!el) return;
+  const max=Math.max(...vals);
+  el.innerHTML=labels.map((l,i)=>`<div class="bar-item"><div class="bar-val">${vals[i]}</div><div class="bar" style="height:${Math.round((vals[i]/max)*80)}px;background:${color||'var(--gold)'}"></div><div class="bar-label">${l}</div></div>`).join('');
+}
+
+/* ===== BRANCH SWITCHER ===== */
+function switchBranch(id){
+  const b=BRANCHES.find(x=>x.id===id);
+  if(!b) return;
+  document.getElementById('active-branch-badge').textContent=b.type==='hq'?'HQ':b.district.split(' ')[0];
+  document.getElementById('branch-email').textContent=b.email;
+  if(id!=='hq'&&b.status!=='upcoming') showToast('🏢 Viewing: '+b.name+' · '+b.district);
+}
+
+/* ===== EMI CALC ===== */
+function calcEMI(){
+  const p=parseFloat(document.getElementById('calc-amt').value)||0;
+  const r=parseFloat(document.getElementById('calc-rate').value)/12/100||0;
+  const n=parseInt(document.getElementById('calc-tenure').value)||0;
+  if(!p||!r||!n) return;
+  const emi=p*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
+  const total=emi*n;
+  const interest=total-p;
+  document.getElementById('emi-val').textContent='₹'+Math.round(emi).toLocaleString('en-IN');
+  document.getElementById('int-val').textContent='₹'+Math.round(interest).toLocaleString('en-IN');
+  document.getElementById('total-val').textContent='₹'+Math.round(total).toLocaleString('en-IN');
+}
+
+/* ===== MODAL ===== */
+const MODALS={
+  'new-lead':{title:'New Lead',body:`<div class="form-2">
+    <div class="fg"><label>Full Name *</label><input placeholder="Customer full name"></div>
+    <div class="fg"><label>Mobile *</label><input placeholder="+91 XXXXX XXXXX"></div>
+    <div class="fg"><label>Loan Product *</label><select><option>Gold Loan</option><option>Mortgage/LAP</option><option>SME Loan</option><option>NCD Investment</option></select></div>
+    <div class="fg"><label>Amount Required</label><input type="number" placeholder="Amount in ₹"></div>
+    <div class="fg"><label>Source</label><select><option>WhatsApp</option><option>Walk-in</option><option>Referral</option><option>Website</option><option>Phone</option></select></div>
+    <div class="fg"><label>Branch</label><select id="mod-branch-sel"></select></div>
+    <div class="fg"><label>Assign To</label><select><option>Karthik R</option><option>Preethi S</option><option>Murugan K</option><option>Deepa M</option></select></div>
+    <div class="fg"><label>CIBIL Score (if known)</label><input type="number" placeholder="e.g. 720"></div>
+    <div class="fg full"><label>Initial Note</label><textarea placeholder="First conversation, purpose, key details..."></textarea></div>
+  </div>`,footer:`<button class="btn btn-secondary" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="saveClose('✅ Lead created and assigned')">Create Lead</button>`},
+  'new-gold':{title:'New Gold Loan',body:`<div class="form-2">
+    <div class="fg"><label>Customer Name *</label><input placeholder="Full name"></div>
+    <div class="fg"><label>Mobile *</label><input placeholder="+91 XXXXX XXXXX"></div>
+    <div class="fg"><label>Branch</label><select id="mod-branch-sel2"></select></div>
+    <div class="fg"><label>Ornament Description</label><input placeholder="Necklace, bangles, rings..."></div>
+    <div class="fg"><label>Gross Weight (g)</label><input type="number" step="0.1" placeholder="e.g. 28.5"></div>
+    <div class="fg"><label>Net Weight (g)</label><input type="number" step="0.1" placeholder="e.g. 24.0"></div>
+    <div class="fg"><label>Gold Rate (₹/g)</label><input type="number" value="6200"></div>
+    <div class="fg"><label>LTV Tier</label><select><option>85% (up to ₹2.5L)</option><option>80% (₹2.5L–₹5L)</option><option>75% (above ₹5L)</option></select></div>
+    <div class="fg"><label>Tenure</label><select><option>6 months (Bullet)</option><option>12 months (Bullet)</option><option>12 months (EMI)</option></select></div>
+    <div class="fg"><label>Gold Purity (KT)</label><select><option>22 KT</option><option>24 KT</option><option>20 KT</option><option>18 KT</option></select></div>
+  </div>`,footer:`<button class="btn btn-secondary" onclick="closeModal()">Cancel</button><button class="btn btn-success" onclick="saveClose('🪙 Gold Loan created · LTV applied · Immediate disbursal')">Create Gold Loan</button>`},
+  'new-mortgage':{title:'New Mortgage / LAP Application',body:`<div class="form-2">
+    <div class="fg"><label>Customer Name *</label><input placeholder="Full name"></div>
+    <div class="fg"><label>Mobile *</label><input placeholder="+91 XXXXX XXXXX"></div>
+    <div class="fg"><label>Branch</label><select id="mod-branch-sel3"></select></div>
+    <div class="fg"><label>Loan Amount (₹) *</label><input type="number" placeholder="Min ₹1L, Max ₹5Cr"></div>
+    <div class="fg"><label>Tenure (Months)</label><input type="number" placeholder="12–180 months" value="120"></div>
+    <div class="fg"><label>Property Type</label><select><option>Residential</option><option>Commercial</option><option>Rental Property</option><option>Vacant Land (clear title)</option></select></div>
+    <div class="fg"><label>Property Location</label><input placeholder="City, Area"></div>
+    <div class="fg"><label>Repayment Method</label><select><option>EMI via NACH (Auto-debit)</option><option>Post-Dated Cheques</option></select></div>
+    <div class="fg"><label>CIBIL Score</label><input type="number" placeholder="Min 650+"></div>
+    <div class="fg"><label>Income Type</label><select><option>Salaried</option><option>Self-Employed</option><option>Business</option></select></div>
+  </div>`,footer:`<button class="btn btn-secondary" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="saveClose('🏠 Mortgage application submitted · Sanction in 2–7 working days')">Submit Application</button>`},
+  'new-investment':{title:'New NCD Investment',body:`<div class="form-2">
+    <div class="fg"><label>Investor Name *</label><input placeholder="Full name as per PAN"></div>
+    <div class="fg"><label>Mobile *</label><input placeholder="+91 XXXXX XXXXX"></div>
+    <div class="fg"><label>PAN Card *</label><input placeholder="ABCDE1234F"></div>
+    <div class="fg"><label>Demat Account DP ID</label><input placeholder="IN301549..."></div>
+    <div class="fg"><label>NCD Scheme *</label><select><option>Doubling Scheme (60M · 20%)</option><option>Cumulative 36M (13.50%)</option><option>Cumulative 24M (13.00%)</option><option>Cumulative 13M (12.50%)</option><option>Annual 36M (13.00%)</option><option>Annual 24M (12.50%)</option><option>Monthly 60M (12.50%)</option><option>Monthly 36M (12.00%)</option><option>Monthly 24M (11.50%)</option><option>Monthly 13M (11.00%)</option></select></div>
+    <div class="fg"><label>Investor Category</label><select><option>Individual</option><option>Senior Citizen (extra 0.5%)</option><option>Corporate / HUF</option></select></div>
+    <div class="fg"><label>Investment Amount (₹)</label><input type="number" placeholder="Min ₹1,00,000" step="100000"></div>
+    <div class="fg"><label>No. of NCDs</label><input type="number" placeholder="Min 1 NCD (₹1L face value)" value="1"></div>
+    <div class="fg"><label>Payment Mode</label><select><option>NEFT</option><option>RTGS</option><option>Cheque</option></select></div>
+    <div class="fg"><label>Branch</label><select id="mod-branch-sel4"></select></div>
+  </div>`,footer:`<button class="btn btn-secondary" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="saveClose('📈 NCD investment registered · Demat allotment initiated')">Register Investment</button>`},
+  'new-branch':{title:'Add New Branch Sub-Account',body:`<div class="form-2">
+    <div class="fg"><label>Branch Name *</label><input placeholder="e.g. Vadavalli"></div>
+    <div class="fg"><label>District *</label><input placeholder="e.g. Coimbatore West"></div>
+    <div class="fg"><label>Branch Email</label><input placeholder="vadavalli@dhanam.finance"></div>
+    <div class="fg"><label>Branch Manager</label><input placeholder="Full name"></div>
+    <div class="fg"><label>Mobile</label><input placeholder="+91 XXXXX XXXXX"></div>
+    <div class="fg"><label>Address</label><textarea placeholder="Full branch address..." rows="2"></textarea></div>
+    <div class="fg"><label>Branch Type</label><select><option>Branch</option><option>Sub-Branch</option><option>Collection Point</option></select></div>
+    <div class="fg"><label>Status</label><select><option>Active</option><option>Upcoming</option></select></div>
+    <div class="fg"><label>Products Offered</label><select><option>All Products</option><option>Gold Loan Only</option><option>Gold + SME</option></select></div>
+    <div class="fg"><label>Login Access</label><select><option>Branch Manager Only</option><option>All Staff</option></select></div>
+  </div>`,footer:`<button class="btn btn-secondary" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="saveClose('🏢 Branch sub-account created · Login credentials sent to manager')">Create Sub-Account</button>`},
+  'new-task':{title:'New Task',body:`<div class="form-2">
+    <div class="fg full"><label>Task *</label><input placeholder="What needs to be done?"></div>
+    <div class="fg"><label>Priority</label><select><option>High</option><option>Medium</option><option>Low</option></select></div>
+    <div class="fg"><label>Due Date</label><input type="date" value="2026-04-16"></div>
+    <div class="fg"><label>Assign To</label><select><option>Karthik R</option><option>Preethi S</option><option>Murugan K</option></select></div>
+    <div class="fg"><label>Category</label><select><option>Follow-up Call</option><option>Document Collection</option><option>Field Visit</option><option>EMI Recovery</option><option>NCD Onboarding</option><option>Other</option></select></div>
+    <div class="fg full"><label>Notes</label><textarea placeholder="Task details..." rows="2"></textarea></div>
+  </div>`,footer:`<button class="btn btn-secondary" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="saveClose('✅ Task created and assigned')">Create Task</button>`},
+  'new-event':{title:'New Calendar Event',body:`<div class="form-2">
+    <div class="fg full"><label>Event Title *</label><input placeholder="Meeting, field visit, gold mela..."></div>
+    <div class="fg"><label>Date</label><input type="date" value="2026-04-16"></div>
+    <div class="fg"><label>Time</label><input type="time" value="10:00"></div>
+    <div class="fg"><label>Branch</label><select><option>All Branches</option><option>HQ Coimbatore</option><option>Erode</option><option>Salem</option></select></div>
+    <div class="fg"><label>Type</label><select><option>Meeting</option><option>Field Visit</option><option>Gold Loan Mela</option><option>Investor Meet</option><option>Audit</option></select></div>
+    <div class="fg full"><label>Notes</label><textarea placeholder="Event details..." rows="2"></textarea></div>
+  </div>`,footer:`<button class="btn btn-secondary" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="saveClose('📅 Event scheduled')">Schedule</button>`},
+  'send-template':{title:'Send WhatsApp Template',body:`<div class="fg" style="margin-bottom:12px"><label>Template</label><select onchange="updTmpl(this.value)"><option value="emi">EMI Due Reminder (Tamil + English)</option><option value="gold">Gold Rate Update & Offer</option><option value="ncd">NCD Investment Invite</option><option value="disburse">Loan Disbursed Alert</option></select></div><div class="fg"><label>Preview</label><textarea id="tmpl-preview" rows="5">Vanakkam {Name} avargale 🙏\n\nUngal loan EMI ₹{Amount} due aagirathe {Date} naal.\n\nPay via: UPI — dhanam@ybl\nToll-free: 1800 2025 180\n\nNanri — Dhanam Finance 💛</textarea></div>`,footer:`<button class="btn btn-secondary" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="saveClose('💬 Template sent successfully')">Send</button>`},
+  'quick-add':{title:'Quick Add',body:`<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+    <button class="btn btn-outline" style="padding:14px;flex-direction:column;gap:4px;height:auto;text-align:center" onclick="closeModal();showModal('new-lead')">👥<br><strong>New Lead</strong></button>
+    <button class="btn btn-outline" style="padding:14px;flex-direction:column;gap:4px;height:auto;text-align:center" onclick="closeModal();showModal('new-gold')">🪙<br><strong>Gold Loan</strong></button>
+    <button class="btn btn-outline" style="padding:14px;flex-direction:column;gap:4px;height:auto;text-align:center" onclick="closeModal();showModal('new-mortgage')">🏠<br><strong>Mortgage/LAP</strong></button>
+    <button class="btn btn-outline" style="padding:14px;flex-direction:column;gap:4px;height:auto;text-align:center" onclick="closeModal();showModal('new-investment')">📈<br><strong>NCD Investment</strong></button>
+    <button class="btn btn-outline" style="padding:14px;flex-direction:column;gap:4px;height:auto;text-align:center" onclick="closeModal();showModal('new-task')">✅<br><strong>New Task</strong></button>
+    <button class="btn btn-outline" style="padding:14px;flex-direction:column;gap:4px;height:auto;text-align:center" onclick="closeModal();showModal('new-branch')">🏢<br><strong>New Branch</strong></button>
+  </div>`,footer:''},
+};
+
+function showModal(key){
+  const c=MODALS[key];if(!c) return;
+  document.getElementById('modal-title').textContent=c.title;
+  document.getElementById('modal-body').innerHTML=c.body;
+  document.getElementById('modal-footer').innerHTML=c.footer;
+  document.getElementById('modal-overlay').classList.add('open');
+  ['mod-branch-sel','mod-branch-sel2','mod-branch-sel3','mod-branch-sel4'].forEach(id=>{
+    const sel=document.getElementById(id);
+    if(sel&&!sel.options.length){BRANCHES.filter(b=>b.status==='active').forEach(b=>{const o=document.createElement('option');o.value=b.id;o.textContent=b.name+' — '+b.district;sel.appendChild(o);});}
+  });
+}
+
+function closeModal(){document.getElementById('modal-overlay').classList.remove('open');}
+function closeModalOutside(e){if(e.target===document.getElementById('modal-overlay'))closeModal();}
+function saveClose(msg){closeModal();showToast(msg);}
+
+function updTmpl(v){
+  const t={emi:'Vanakkam {Name} avargale 🙏\n\nUngal loan EMI ₹{Amount} due aagirathe {Date} naal.\nPay via UPI: dhanam@ybl\nToll-free: 1800 2025 180\n— Dhanam Finance 💛',gold:'Dear {Name},\n\nToday\'s Gold Rate: ₹6,200/g 🪙\nGet INSTANT cash against gold!\nLTV up to 85% · Same day disbursal\n\nVisit nearest branch or call 1800 2025 180\n— Dhanam Finance',ncd:'Dear {Name},\n\nInvest with Dhanam — Secured NCDs!\n📈 Up to 20% effective yield\n✅ RBI Licensed NBFC · Demat allotted\n💰 Min ₹1 lakh · 13–60 month tenures\n\nCall: 1800 2025 180 | wa.me/917305022272\n— Dhanam Finance',disburse:'Dear {Name},\n\n✅ Your loan of ₹{Amount} has been disbursed!\nFirst EMI date: {Date}\n\nFor queries: 1800 2025 180\n— Dhanam Finance 💛'};
+  const el=document.getElementById('tmpl-preview');
+  if(el)el.value=t[v]||'';
+}
+
+function loadSMSTpl(v){
+  const t={emi:'Dear {Name}, your EMI ₹{Amount} is due on {Date}. Pay to avoid late charges. Toll-free: 1800 2025 180 — Dhanam Finance',ncd:'Dear {Name}, your NCD interest payout of ₹{Amount} has been credited to your bank account. — Dhanam Finance',offer:'Dear {Name}, get INSTANT Gold Loan at 9% p.a. today! Highest rate per gram. Visit nearest Dhanam branch. — 1800 2025 180',kyc:'Dear {Name}, your KYC renewal is due. Visit branch with Aadhaar & PAN before {Date}. — Dhanam Finance'};
+  const el=document.getElementById('sms-msg');if(el)el.value=t[v]||'';
+}
+
+function switchTab(el){el.closest('.tabs').querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');}
+function handleSearch(v){if(v.length>2)showToast('🔍 Searching for "'+v+'" across all branches...');}
+
+let toastTimer;
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),3000);}
+
+/* ===== CALLING ===== */
+const CALL_LOG = [
+  {id:'c1',name:'Ramesh Kumar',av:'RK',product:'Gold Loan',mobile:'98765 43210',type:'outbound',status:'connected',duration:'3m 24s',time:'Today, 11:42 AM',branch:'Ganapathy',notes:'Interested in ₹3.5L gold loan. Will visit branch on 16 Apr.'},
+  {id:'c2',name:'Meena Devi',av:'MD',product:'Mortgage/LAP',mobile:'87654 32109',type:'inbound',status:'connected',duration:'6m 11s',time:'Today, 10:18 AM',branch:'Gandhipuram',notes:'Enquired about LAP documents. Callback set for 3 PM.'},
+  {id:'c3',name:'Selvam Enterprises',av:'SE',product:'SME Loan',mobile:'76543 21098',type:'outbound',status:'missed',duration:'—',time:'Today, 9:55 AM',branch:'Erode',notes:''},
+  {id:'c4',name:'Priya Lakshmi',av:'PL',product:'NCD Investment',mobile:'98712 34567',type:'inbound',status:'connected',duration:'8m 45s',time:'Yesterday, 4:30 PM',branch:'HQ',notes:'Wants to invest ₹5L in Monthly NCD scheme. Send brochure.'},
+  {id:'c5',name:'Murugan K',av:'MK',product:'Gold Loan',mobile:'90123 45678',type:'outbound',status:'connected',duration:'2m 05s',time:'Yesterday, 2:00 PM',branch:'Salem',notes:''},
+  {id:'c6',name:'Kavitha R',av:'KR',product:'Mortgage/LAP',mobile:'91234 56789',type:'outbound',status:'missed',duration:'—',time:'Yesterday, 11:00 AM',branch:'Tiruppur',notes:''},
+  {id:'c7',name:'Anand S',av:'AS',product:'NCD Investment',mobile:'80123 45678',type:'inbound',status:'connected',duration:'12m 30s',time:'14 Apr, 3:15 PM',branch:'HQ',notes:'Invested ₹10L in Cumulative 36M scheme.'},
+];
+
+const QUICK_CONTACTS = [
+  {name:'Ramesh Kumar',av:'RK',mobile:'98765 43210',product:'Gold Loan'},
+  {name:'Meena Devi',av:'MD',mobile:'87654 32109',product:'Mortgage'},
+  {name:'Priya Lakshmi',av:'PL',mobile:'98712 34567',product:'NCD Investor'},
+];
+
+let callTimer=null,callSecs=0,isMuted=false,isSpeaker=false,isOnHold=false,lastCallName='',lastCallAv='',lastCallProduct='';
+let currentCallFilter='all';
+
+function renderCallList(){
+  const list=document.getElementById('call-list-scroll');if(!list)return;
+  const filtered=currentCallFilter==='all'?CALL_LOG:CALL_LOG.filter(c=>currentCallFilter==='missed'?c.status==='missed':c.type===currentCallFilter);
+  list.innerHTML=filtered.map((c,i)=>`
+    <div class="call-item ${i===0?'active':''}" onclick="selectCallLog('${c.id}','${c.name}','${c.av}','${c.product}')">
+      <div class="call-av" style="background:${c.status==='missed'?'var(--red-light)':'var(--navy)'}">
+        <span style="color:${c.status==='missed'?'var(--red)':'var(--gold)'}">${c.av}</span>
+        <div class="call-av-status" style="background:${c.type==='inbound'?'var(--teal)':c.status==='missed'?'var(--red)':'var(--gold)'}"></div>
+      </div>
+      <div class="call-info">
+        <div class="call-name">${c.name}</div>
+        <div class="call-meta">
+          <span>${c.type==='inbound'?'↙':'↗'} ${c.type}</span>
+          <span>·</span>
+          <span>${c.product}</span>
+        </div>
+      </div>
+      <div style="text-align:right">
+        <div class="call-time">${c.time.includes('Today')?c.time.replace('Today, ',''):c.time}</div>
+        <div style="font-size:10px;color:${c.status==='missed'?'var(--red)':'var(--text3)'};margin-top:2px">${c.status==='missed'?'Missed':c.duration}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterCalls(f,el){
+  currentCallFilter=f;
+  el.closest('div').querySelectorAll('.conv-filter-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  renderCallList();
+}
+
+function selectCallLog(id,name,av,product){
+  const c=CALL_LOG.find(x=>x.id===id);if(!c)return;
+  document.querySelectorAll('.call-item').forEach(i=>i.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  document.getElementById('dialpad-view').style.display='none';
+  document.getElementById('active-call-view').style.display='none';
+  const ev=document.getElementById('call-ended-view');ev.style.display='flex';
+  document.getElementById('ended-av').textContent=av;
+  document.getElementById('ended-name').textContent=name;
+  document.getElementById('ended-meta').textContent=`${c.type.charAt(0).toUpperCase()+c.type.slice(1)} · ${c.duration} · ${c.time}`;
+  lastCallName=name;lastCallAv=av;lastCallProduct=product;
+  const log=document.getElementById('call-detail-log');
+  log.innerHTML=`
+    <div style="padding:16px 20px;background:var(--surface);border-bottom:1px solid var(--border)">
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <div class="stat-card" style="flex:1;min-width:100px;padding:10px 14px"><div class="stat-label">Type</div><div style="font-size:14px;font-weight:500;margin-top:3px">${c.type==='inbound'?'↙ Inbound':'↗ Outbound'}</div></div>
+        <div class="stat-card" style="flex:1;min-width:100px;padding:10px 14px"><div class="stat-label">Duration</div><div style="font-size:14px;font-weight:500;margin-top:3px">${c.duration}</div></div>
+        <div class="stat-card" style="flex:1;min-width:100px;padding:10px 14px"><div class="stat-label">Status</div><div style="font-size:14px;font-weight:500;margin-top:3px;color:${c.status==='missed'?'var(--red)':'var(--green)'}">${c.status.charAt(0).toUpperCase()+c.status.slice(1)}</div></div>
+        <div class="stat-card" style="flex:1;min-width:100px;padding:10px 14px"><div class="stat-label">Branch</div><div style="font-size:14px;font-weight:500;margin-top:3px">${c.branch}</div></div>
+      </div>
+    </div>
+    ${c.notes?`<div style="padding:16px 20px;background:var(--surface);border-bottom:1px solid var(--border)"><div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--text3);margin-bottom:8px">Call Notes</div><div style="font-size:13px;color:var(--text2);line-height:1.55;background:var(--gold-light);border:1px solid rgba(200,153,42,.2);border-radius:8px;padding:10px 12px">${c.notes}</div></div>`:''}
+    <div style="padding:16px 20px;background:var(--surface)">
+      <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--text3);margin-bottom:10px">Customer Info</div>
+      <div class="dp-row"><span class="dp-row-label">Mobile</span><span class="dp-row-val">${c.mobile}</span></div>
+      <div class="dp-row"><span class="dp-row-label">Product</span><span class="dp-row-val">${c.product}</span></div>
+      <div class="dp-row"><span class="dp-row-label">Branch</span><span class="dp-row-val">${c.branch}</span></div>
+      <div class="dp-row"><span class="dp-row-label">Time</span><span class="dp-row-val">${c.time}</span></div>
+    </div>
+  `;
+}
+
+function showDialPad(){
+  document.getElementById('dialpad-view').style.display='flex';
+  document.getElementById('active-call-view').style.display='none';
+  document.getElementById('call-ended-view').style.display='none';
+}
+
+function renderDialPad(){
+  const keys=[['1',''],['2','ABC'],['3','DEF'],['4','GHI'],['5','JKL'],['6','MNO'],['7','PQRS'],['8','TUV'],['9','WXYZ'],['*',''],['0','+'],['#','']];
+  const g=document.getElementById('dialpad-grid');if(!g)return;
+  g.innerHTML=keys.map(([n,s])=>`<div class="dp-key" onclick="dialpadPress('${n}')"><div class="dp-key-num">${n}</div>${s?`<div class="dp-key-sub">${s}</div>`:''}</div>`).join('');
+}
+
+function dialpadPress(k){
+  const d=document.getElementById('dialpad-display');
+  if(d.textContent==='_')d.textContent=k;else d.textContent+=k;
+}
+function dialpadClear(){
+  const d=document.getElementById('dialpad-display');
+  if(!d)return;
+  d.textContent=d.textContent.length>1?d.textContent.slice(0,-1):'_';
+}
+function startCallFromDial(){
+  const d=document.getElementById('dialpad-display');
+  const num=d?d.textContent:'';
+  if(!num||num==='_'){showToast('⚠️ Enter a number first');return;}
+  startCall(num,num.slice(-2),'Unknown');
+}
+
+function renderQuickContacts(){
+  const c=document.getElementById('quick-contacts');if(!c)return;
+  c.innerHTML=QUICK_CONTACTS.map(q=>`
+    <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--surface);border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:all .15s" onmouseenter="this.style.borderColor='var(--gold)'" onmouseleave="this.style.borderColor='var(--border)'" onclick="startCall('${q.name}','${q.av}','${q.product}')">
+      <div class="call-av" style="width:32px;height:32px;font-size:11px">${q.av}</div>
+      <div style="flex:1"><div style="font-size:13px;font-weight:500">${q.name}</div><div style="font-size:11px;color:var(--text3)">${q.mobile} · ${q.product}</div></div>
+      <button class="btn btn-primary btn-sm">📞</button>
+    </div>
+  `).join('');
+}
+
+function startCall(name,av,product){
+  lastCallName=name;lastCallAv=av;lastCallProduct=product;
+  document.getElementById('dialpad-view').style.display='none';
+  document.getElementById('call-ended-view').style.display='none';
+  const av_el=document.getElementById('active-call-view');av_el.style.display='flex';
+  document.getElementById('ac-av').textContent=av;
+  document.getElementById('ac-name').textContent=name;
+  document.getElementById('ac-sub').textContent=product+' · Connecting...';
+  document.getElementById('ac-status').textContent='Connecting...';
+  document.getElementById('ac-timer').textContent='00:00';
+  isMuted=false;isSpeaker=false;isOnHold=false;
+  document.getElementById('btn-mute').classList.remove('on');
+  document.getElementById('btn-speaker').classList.remove('on');
+  clearInterval(callTimer);callSecs=0;
+  setTimeout(()=>{
+    document.getElementById('ac-sub').textContent=product+' · Connected';
+    document.getElementById('ac-status').textContent='Connected';
+    callTimer=setInterval(()=>{callSecs++;const m=String(Math.floor(callSecs/60)).padStart(2,'0'),s=String(callSecs%60).padStart(2,'0');document.getElementById('ac-timer').textContent=m+':'+s;},1000);
+  },1200);
+  if(document.getElementById('page-calling').classList.contains('active')||true){
+    // nav to calling
+    nav('calling');
+  }
+}
+
+function endCall(){
+  clearInterval(callTimer);
+  const duration=document.getElementById('ac-timer').textContent;
+  document.getElementById('active-call-view').style.display='none';
+  const ev=document.getElementById('call-ended-view');ev.style.display='flex';
+  document.getElementById('ended-av').textContent=lastCallAv;
+  document.getElementById('ended-name').textContent=lastCallName;
+  document.getElementById('ended-meta').textContent=`Outbound · ${duration} · Just now`;
+  const log=document.getElementById('call-detail-log');
+  log.innerHTML=`<div style="padding:16px 20px;background:var(--surface)"><div style="display:flex;gap:12px;flex-wrap:wrap"><div class="stat-card" style="flex:1;min-width:100px;padding:10px 14px"><div class="stat-label">Type</div><div style="font-size:14px;font-weight:500;margin-top:3px">↗ Outbound</div></div><div class="stat-card" style="flex:1;min-width:100px;padding:10px 14px"><div class="stat-label">Duration</div><div style="font-size:14px;font-weight:500;margin-top:3px">${duration}</div></div><div class="stat-card" style="flex:1;min-width:100px;padding:10px 14px"><div class="stat-label">Status</div><div style="font-size:14px;font-weight:500;margin-top:3px;color:var(--green)">Connected</div></div></div></div>`;
+  CALL_LOG.unshift({id:'cnew',name:lastCallName,av:lastCallAv,product:lastCallProduct,mobile:'—',type:'outbound',status:'connected',duration:duration,time:'Just now',branch:'HQ',notes:''});
+  renderCallList();
+  showToast('📞 Call ended · '+duration+' · Add a note below');
+}
+
+function toggleMute(){isMuted=!isMuted;document.getElementById('btn-mute').classList.toggle('on',isMuted);showToast(isMuted?'🎤 Muted':'🎤 Unmuted');}
+function toggleSpeaker(){isSpeaker=!isSpeaker;document.getElementById('btn-speaker').classList.toggle('on',isSpeaker);showToast(isSpeaker?'🔊 Speaker on':'🔊 Speaker off');}
+function toggleHold(){isOnHold=!isOnHold;document.getElementById('btn-hold').style.background=isOnHold?'var(--amber)':'';document.getElementById('ac-status').textContent=isOnHold?'On Hold — Customer hears music':'Connected';if(isOnHold){clearInterval(callTimer);}else{callTimer=setInterval(()=>{callSecs++;const m=String(Math.floor(callSecs/60)).padStart(2,'0'),s=String(callSecs%60).padStart(2,'0');document.getElementById('ac-timer').textContent=m+':'+s;},1000);}showToast(isOnHold?'⏸ Call on hold':'▶ Call resumed');}
+function toggleCallDialpad(){const d=document.getElementById('incall-dialpad');d.style.display=d.style.display==='none'?'block':'none';}
+function saveCallNote(){const t=document.getElementById('call-note-text');showToast('📝 Call note saved · Added to timeline');if(t)t.value='';}
+
+/* ===== CONVERSATIONS ===== */
+const CONV_DATA = [
+  {id:'cv1',name:'Ramesh Kumar',av:'RK',product:'Gold Loan',branch:'Ganapathy',mobile:'98765 43210',unread:2,channel:'whatsapp',lastMsg:'Thank you, I will visit the branch tomorrow morning.',lastTime:'11:42 AM',messages:[
+    {from:'customer',text:'Vanakkam sir, gold loan rate enna irukku?',time:'10:15 AM',channel:'whatsapp'},
+    {from:'agent',text:'Vanakkam Ramesh sir! Today\'s gold rate is ₹6,200/g. We offer up to 85% LTV for amounts up to ₹2.5L. For ₹3.5L you will get ~80% LTV.',time:'10:18 AM',channel:'whatsapp',agent:'Karthik R'},
+    {from:'customer',text:'OK sir, naan 52 gram gold vachiruken. Evalo loan kidaikum?',time:'10:22 AM',channel:'whatsapp'},
+    {from:'agent',text:'52g (net ~44g) at ₹6,200/g = ₹2.72L value. At 80% LTV you can get approximately ₹2.18L - ₹2.5L. Come to branch with Aadhaar + Photo, disbursement same day! 🏦',time:'10:25 AM',channel:'whatsapp',agent:'Karthik R'},
+    {from:'system',text:'📞 Outbound call — 3m 24s — Connected',time:'11:42 AM',channel:'call'},
+    {from:'customer',text:'Thank you, I will visit the branch tomorrow morning.',time:'11:45 AM',channel:'whatsapp'},
+  ]},
+  {id:'cv2',name:'Meena Devi',av:'MD',product:'Mortgage/LAP',branch:'Gandhipuram',mobile:'87654 32109',unread:1,channel:'whatsapp',lastMsg:'Please send me the document checklist.',lastTime:'10:18 AM',messages:[
+    {from:'agent',text:'Hello Meena madam, our team has reviewed your LAP application. CIBIL 712 is good. Property at Saravanampatti qualifies.',time:'Yesterday 4:00 PM',channel:'whatsapp',agent:'Preethi S'},
+    {from:'customer',text:'How many days will it take?',time:'Yesterday 4:05 PM',channel:'whatsapp'},
+    {from:'agent',text:'Sanction within 2-5 working days after all documents are submitted. Disbursement within 7 days post MODT registration.',time:'Yesterday 4:08 PM',channel:'whatsapp',agent:'Preethi S'},
+    {from:'system',text:'📞 Inbound call — 6m 11s — Connected',time:'Today 10:18 AM',channel:'call'},
+    {from:'customer',text:'Please send me the document checklist.',time:'Today 10:22 AM',channel:'whatsapp'},
+  ]},
+  {id:'cv3',name:'Selvam Enterprises',av:'SE',product:'SME Loan',branch:'Erode',mobile:'76543 21098',unread:0,channel:'sms',lastMsg:'Callback set for 3 PM today.',lastTime:'9:55 AM',messages:[
+    {from:'agent',text:'Dear Selvam sir, your SME Loan application is under review. CIBIL check completed — 680. Please provide last 6 months bank statement.',time:'14 Apr 2:00 PM',channel:'sms',agent:'Murugan K'},
+    {from:'system',text:'📵 Outbound call — Missed',time:'Today 9:55 AM',channel:'call'},
+    {from:'agent',text:'Callback set for 3 PM today.',time:'Today 10:00 AM',channel:'sms',agent:'Murugan K'},
+  ]},
+  {id:'cv4',name:'Priya Lakshmi',av:'PL',product:'NCD Investment',branch:'HQ',mobile:'98712 34567',unread:3,channel:'email',lastMsg:'Can you send the NCD brochure and application form?',lastTime:'Yesterday',messages:[
+    {from:'system',text:'📞 Inbound call — 8m 45s — Connected',time:'Yesterday 4:30 PM',channel:'call'},
+    {from:'customer',text:'Can you send the NCD brochure and application form? I want to invest ₹5L in the monthly scheme.',time:'Yesterday 4:45 PM',channel:'email'},
+    {from:'agent',text:'Dear Priya madam, thank you for your interest! I am attaching the NCD brochure. Monthly scheme at 12.5% p.a. Min ₹1 lakh · 36M recommended for senior citizens.',time:'Yesterday 5:00 PM',channel:'email',agent:'Hema'},
+    {from:'customer',text:'Received. I will discuss with my husband and get back to you.',time:'Yesterday 5:15 PM',channel:'email'},
+    {from:'customer',text:'We have decided to go ahead. Please send account details for NEFT.',time:'Today 9:30 AM',channel:'email'},
+  ]},
+  {id:'cv5',name:'Anand S',av:'AS',product:'NCD Investment',branch:'HQ',mobile:'80123 45678',unread:0,channel:'whatsapp',lastMsg:'Investment confirmed. Thank you!',lastTime:'14 Apr',messages:[
+    {from:'customer',text:'I want to invest ₹10L in Cumulative 36 months scheme.',time:'14 Apr 3:00 PM',channel:'whatsapp'},
+    {from:'agent',text:'Wonderful Anand sir! Cumulative 36M at 13% effective yield. For ₹10L you will receive ₹14.29L at maturity. Demat is mandatory. Do you have a Demat account?',time:'14 Apr 3:05 PM',channel:'whatsapp',agent:'Hema'},
+    {from:'system',text:'📞 Inbound call — 12m 30s — Connected',time:'14 Apr 3:15 PM',channel:'call'},
+    {from:'customer',text:'Investment confirmed. Thank you!',time:'14 Apr 4:00 PM',channel:'whatsapp'},
+  ]},
+];
+
+let currentConvId='cv1',convFilter='all',convChannelFilter='all';
+
+function renderConvList(filter=''){
+  const list=document.getElementById('conv-list');if(!list)return;
+  let data=CONV_DATA;
+  if(convChannelFilter!=='all')data=data.filter(c=>c.channel===convChannelFilter);
+  if(filter)data=data.filter(c=>c.name.toLowerCase().includes(filter.toLowerCase())||c.product.toLowerCase().includes(filter.toLowerCase()));
+  list.innerHTML=data.map(c=>`
+    <div class="conv-item ${c.id===currentConvId?'active':''}" onclick="selectConv('${c.id}')">
+      <div class="conv-av">${c.av}</div>
+      <div class="conv-body">
+        <div class="conv-row1">
+          <div class="conv-cname">${c.name}</div>
+          <div class="conv-ts">${c.lastTime}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:4px">
+          <span class="conv-channel-icon">${c.channel==='whatsapp'?'💬':c.channel==='sms'?'📱':c.channel==='email'?'📧':'📞'}</span>
+          <div class="conv-preview">${c.lastMsg}</div>
+          ${c.unread?`<div class="conv-unread">${c.unread}</div>`:''}
+        </div>
+        <div style="margin-top:4px"><span class="badge ${c.product.includes('Gold')?'bg':c.product.includes('Mortgage')?'bn':c.product.includes('SME')?'bteal':'bgreen'}" style="font-size:9.5px;padding:1px 6px">${c.product}</span></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function selectConv(id){
+  currentConvId=id;
+  const c=CONV_DATA.find(x=>x.id===id);if(!c)return;
+  c.unread=0;
+  renderConvList();
+  document.getElementById('conv-hdr-av').textContent=c.av;
+  document.getElementById('conv-hdr-name').textContent=c.name;
+  document.getElementById('conv-hdr-sub').textContent=c.product+' · '+c.mobile+' · '+c.branch+' Branch';
+  renderConvMessages(c);
+}
+
+const CHANNEL_COLORS={whatsapp:{bg:'#dcf8c6',text:'#075e54',label:'WhatsApp'},sms:{bg:'#e3f0ff',text:'#1565C0',label:'SMS'},email:{bg:'#fce4ec',text:'#880e4f',label:'Email'},call:{bg:'#f3e5f5',text:'#6a1b9a',label:'Call Log'}};
+
+function renderConvMessages(c){
+  const box=document.getElementById('conv-messages');if(!box)return;
+  let lastDate='';
+  box.innerHTML=c.messages.map(m=>{
+    const isSystem=m.from==='system';
+    const isOut=m.from==='agent';
+    const ch=CHANNEL_COLORS[m.channel]||{bg:'#eee',text:'#333',label:m.channel};
+    if(isSystem){
+      return `<div style="text-align:center;margin:10px 0"><span style="background:${ch.bg};color:${ch.text};font-size:11px;padding:4px 12px;border-radius:20px;display:inline-block">${m.text} · ${m.time}</span></div>`;
+    }
+    return `<div class="conv-msg ${isOut?'out':''}">
+      <div class="conv-msg-av ${isOut?'agent':''}">${isOut?(m.agent||'H').split(' ').map(w=>w[0]).join('').slice(0,2):c.av}</div>
+      <div>
+        <span class="conv-channel-tag" style="background:${ch.bg};color:${ch.text}">${ch.label}</span>
+        <div class="conv-bubble ${isOut?'out':'in'}">${m.text}<div class="conv-bubble-meta">${m.time}${isOut?' · '+m.agent:''}</div></div>
+      </div>
+    </div>`;
+  }).join('');
+  box.scrollTop=box.scrollHeight;
+}
+
+function filterConvs(v){renderConvList(v);}
+function filterConvsByChannel(ch,el){
+  convChannelFilter=ch;
+  el.closest('div').querySelectorAll('.conv-filter-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  renderConvList();
+}
+
+function updateConvChannel(){
+  const sel=document.getElementById('conv-channel-sel');
+  const inp=document.getElementById('conv-input');
+  if(sel.value==='call'){inp.placeholder='Describe the call outcome...';} 
+  else if(sel.value==='email'){inp.placeholder='Type your email message...';}
+  else if(sel.value==='sms'){inp.placeholder='Type SMS (max 160 chars)...';}
+  else{inp.placeholder='Type a WhatsApp message...';}
+}
+
+function sendConvMsg(){
+  const inp=document.getElementById('conv-input');
+  const sel=document.getElementById('conv-channel-sel');
+  const txt=inp?inp.value.trim():'';if(!txt)return;
+  const c=CONV_DATA.find(x=>x.id===currentConvId);if(!c)return;
+  const ch=sel?sel.value:'whatsapp';
+  c.messages.push({from:'agent',text:txt,time:'Just now',channel:ch,agent:'Hema'});
+  c.lastMsg=txt;c.lastTime='Just now';
+  renderConvMessages(c);
+  renderConvList();
+  inp.value='';inp.style.height='auto';
+  showToast('✉️ Message sent via '+(CHANNEL_COLORS[ch]||{label:ch}).label);
+}
+
+function addConvNote(){
+  const inp=document.getElementById('conv-note-inp');
+  const txt=inp?inp.value.trim():'';if(!txt)return;
+  const c=CONV_DATA.find(x=>x.id===currentConvId);if(!c)return;
+  c.messages.push({from:'system',text:'📌 Internal note: '+txt,time:'Just now',channel:'note'});
+  renderConvMessages(c);
+  inp.value='';
+  showToast('📌 Internal note added');
+}
+
+/* ===== INIT ===== */
+window.onload=()=>{
+  renderBarChart('dash-chart',['1','5','7','8','9','10','11','12','14'],[65,48,82,54,91,73,88,60,75]);
+  calcEMI();
+  renderCallList();
+  renderDialPad();
+  renderQuickContacts();
+  renderConvList();
+  selectConv('cv1');
+};
+</script>
+</body>
+</html>
